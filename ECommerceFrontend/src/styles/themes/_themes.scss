@@ -1,17 +1,24 @@
-.theme-dark {
-    --color-bg-dark: #0F172A;
-    --color-text-dark: #E0E7FF;
-    --color-primary-dark: #3B82F6;
-    --color-hover-dark: #60A5FA;
-    --color-card-dark: #1E293B;
-    --color-border-dark: #334155;
+body.dark {
+  --bg: #0F172A;                
+  --text: #E0E7FF;             
+  --accent: #3B82F6;            
+  --primary-light: #60A5FA;     
+  --primary-dark: #1E293B;      
 }
 
-.theme-light {
-    --color-bg: #F0F6FF;
-    --color-text: #1A2B4C;
-    --color-primary: #2D6CDF;
-    --color-hover: #1F56B3;
-    --color-card: #FFFFFF;
-    --color-border: #D1E0F5;
+body.light {
+    --bg: #F0F6FF;
+    --text: #1A2B4C;
+    --accent: #2D6CDF;
+    --primary-light: #1F56B3;
+    --primary-dark: #FFFFFF;
+}
+
+.theme-toggle {
+  margin-left: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: var(--text);
 }

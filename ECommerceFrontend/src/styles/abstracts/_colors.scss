@@ -1,15 +1,16 @@
-// 💡 MODO CLARO
-$color-bg: #F0F6FF;
-$color-text: #1A2B4C;
-$color-primary: #2D6CDF;
-$color-hover: #1F56B3;
-$color-card: #FFFFFF;
-$color-border: #D1E0F5;
+// Base palette
+$blue: #3B82F6;
+$blue-light: #60A5FA;
+$blue-dark: #1F56B3;
 
-// 🌙 MODO OSCURO
-$color-bg-dark: #0F172A;
-$color-text-dark: #E0E7FF;
-$color-primary-dark: #3B82F6;
-$color-hover-dark: #60A5FA;
-$color-card-dark: #1E293B;
-$color-border-dark: #334155;
+$gray-light: #F0F6FF;
+$gray: #D1E0F5;
+$gray-dark: #1E293B;
+
+$white: #ffffff;
+$black: #0F172A;
+
+$primary: $blue;
+$primary-hover: $blue-dark;
+$bg-light: $gray-light;
+$bg-dark: $black;
