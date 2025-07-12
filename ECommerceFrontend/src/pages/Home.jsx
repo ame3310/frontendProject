@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ProductContext } from "../context/ProductContext";
-import "../styles/Home.scss";
+import "../styles/pages/Home.scss";
 
 const Home = () => {
   const { products, getFeaturedProducts } = useContext(ProductContext);

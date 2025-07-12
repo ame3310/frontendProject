@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import Products from "./pages/Products.jsx";
 import ProductDetail from "./pages/ProductDetail.jsx";
-import ProductProvider from "./context/ProductProvider";
+import { ProductProvider } from "./context/ProductContext.jsx";
 
 function App() {
   return (

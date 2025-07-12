@@ -8,10 +8,10 @@ const ProductProvider = ({ children }) => {
     { id: 3, name: "Gorra", price: 14.99, image: "https://via.placeholder.com/150" },
   ]);
 
-  const getFeaturedProducts = () => {
-    // Simulación; podrías filtrar o hacer llamada a API aquí
-    return products;
-  };
+const getFeaturedProducts = () => {
+  // Por ahora solo retorna los primeros productos
+  return products.slice(0, 4);
+};
 
   return (
     <ProductContext.Provider value={{ products, getFeaturedProducts }}>
