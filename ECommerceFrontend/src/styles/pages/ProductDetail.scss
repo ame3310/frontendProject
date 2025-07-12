@@ -1,0 +1,125 @@
+.product-detail {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+  .product-card {
+    display: flex;
+    gap: 2rem;
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+
+    img {
+      max-width: 250px;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    .details {
+      flex: 1;
+
+      h2 {
+        color: #fda085;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      p {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+
+        &.price {
+          font-weight: bold;
+          color: #333;
+        }
+      }
+    }
+  }
+
+  .review-section {
+    h3 {
+      margin-bottom: 1rem;
+      color: #fda085;
+      font-size: 1.5rem;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid #fda085;
+      border-radius: 8px;
+      font-size: 1rem;
+      resize: vertical;
+      margin-bottom: 1rem;
+
+      &:focus {
+        border-color: #f6d365;
+        outline: none;
+      }
+    }
+
+    input[type="file"] {
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    button {
+      background: linear-gradient(to right, #f6d365, #fda085);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 20px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      margin-bottom: 2rem;
+
+      &:hover {
+        background: linear-gradient(to right, #fda085, #f6d365);
+        transform: scale(1.05);
+      }
+    }
+
+    .reviews {
+      h4 {
+        margin-bottom: 1rem;
+        color: #fda085;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+          background: black;
+          border-radius: 10px;
+          padding: 1rem;
+          margin-bottom: 1rem;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+
+          p {
+            margin: 0 0 0.5rem 0;
+          }
+
+          span {
+            display: block;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+          }
+
+          img {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 8px;
+            display: block;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "frontendproject",
   "version": "1.0.0",
   "description": "![banner](./ECommerceFrontend/src/assets/projectBanner.png)\r ![SASS](https://img.shields.io/badge/Sass-CC6699?logo=sass&logoColor=white)\r ![React](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB)\r ![Made with JavaScript](https://img.shields.io/badge/Made%20with-JavaScript-yellow?logo=javascript)\r ![Visual Studio Code](https://img.shields.io/badge/Editor-VSCode-blue?logo=visualstudiocode)",
@@ -160,4 +161,34 @@
     "url": "https://github.com/ame3310/frontendProject/issues"
   },
   "homepage": "https://github.com/ame3310/frontendProject#readme"
+=======
+  "name": "package.json",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^1.10.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.3",
+    "sass": "^1.89.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.30.1",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.6.0",
+    "eslint": "^9.30.1",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.3.0",
+    "vite": "^7.0.4"
+  }
+>>>>>>> develop
 }

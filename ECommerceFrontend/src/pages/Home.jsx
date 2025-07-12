@@ -1,35 +1,37 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ProductContext } from "../context/ProductContext";
-import "../styles/Home.scss";
+import "../styles/pages/Home.scss";
 
 const Home = () => {
-  const { products, getFeaturedProducts } = useContext(ProductContext);
+  const { getFeaturedProducts } = useContext(ProductContext);
+  const [featuredProducts, setFeaturedProducts] = useState([]);
 
   useEffect(() => {
-    getFeaturedProducts();
+    const featured = getFeaturedProducts();
+    setFeaturedProducts(featured);
   }, []);
 
   return (
     <div className="home">
       <section className="hero">
-        <h1>Bienvenido a Nuestra Tienda</h1>
-        <p>Descubre productos increíbles al mejor precio</p>
+        <h1>Welcome to Our E-commerce</h1>
+        <p>Discover amazing products at the best prices</p>
         <Link to="/products" className="btn-primary">
-          Ver Productos
+          View Products
         </Link>
       </section>
 
       <section className="featured">
-        <h2>Productos Destacados</h2>
+        <h2>Featured Products</h2>
         <div className="product-grid">
-          {products.slice(0, 4).map((product) => (
+          {featuredProducts.map((product) => (
             <div className="product-card" key={product.id}>
               <img src={product.image} alt={product.name} />
               <h3>{product.name}</h3>
               <p>${product.price.toFixed(2)}</p>
-              <Link to={`/product/${product.id}`} className="btn-secondary">
-                Ver Detalles
+              <Link to={`/products/${product.id}`} className="btn-secondary">
+                View Details
               </Link>
             </div>
           ))}

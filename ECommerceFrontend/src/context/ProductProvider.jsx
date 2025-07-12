@@ -1,16 +1,14 @@
-import React, { createContext, useState, useEffect } from "react";
-
-export const ProductContext = createContext();
+import React, { useState } from "react";
+import { ProductContext } from "./ProductContext";
 
 const ProductProvider = ({ children }) => {
-  const initialProducts = [
+  const [products, setProducts] = useState([
     {
       id: 1,
       name: "Camiseta básica",
       category: "ropa",
       price: 12.99,
       image: "/images/Product1.jpg",
-      featured: true,
     },
     {
       id: 2,
@@ -18,7 +16,6 @@ const ProductProvider = ({ children }) => {
       category: "ropa",
       price: 59.9,
       image: "/images/Product2.jpg",
-      featured: true,
     },
     {
       id: 3,
@@ -26,7 +23,6 @@ const ProductProvider = ({ children }) => {
       category: "libros",
       price: 18.95,
       image: "/images/Product3.jpg",
-      featured: false,
     },
     {
       id: 4,
@@ -34,7 +30,6 @@ const ProductProvider = ({ children }) => {
       category: "libros",
       price: 22.5,
       image: "/images/Product4.jpg",
-      featured: true,
     },
     {
       id: 5,
@@ -42,7 +37,6 @@ const ProductProvider = ({ children }) => {
       category: "tecnología",
       price: 399.99,
       image: "/images/Product5.jpg",
-      featured: false,
     },
     {
       id: 6,
@@ -50,20 +44,15 @@ const ProductProvider = ({ children }) => {
       category: "tecnología",
       price: 79.9,
       image: "/images/Product6.jpg",
-      featured: true,
     },
-  ];
+  ]);
 
-  const [products] = useState(initialProducts);
-  const [featuredProducts, setFeaturedProducts] = useState([]);
-
-  useEffect(() => {
-    const featured = initialProducts.filter((p) => p.featured);
-    setFeaturedProducts(featured);
-  }, []);
+  const getFeaturedProducts = () => {
+    return products.slice(0, 3);
+  };
 
   return (
-    <ProductContext.Provider value={{ products, featuredProducts }}>
+    <ProductContext.Provider value={{ products, getFeaturedProducts }}>
       {children}
     </ProductContext.Provider>
   );
