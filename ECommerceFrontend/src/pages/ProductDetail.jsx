@@ -1,14 +1,4 @@
 import { useParams } from "react-router-dom";
-<<<<<<< HEAD
-
-const ProductDetail = () => {
-  const { id } = useParams();
-
-  return (
-    <div style={{ marginTop: '20px' }}>
-      <h3>Detalle del Producto</h3>
-      <p>Mostrando detalles del producto con ID: {id}</p>
-=======
 import { useEffect, useState } from "react";
 import allProductsData from "../data/productsData.jsx";
 import "../styles/pages/ProductDetail.scss";
@@ -138,7 +128,6 @@ const ProductDetail = () => {
           )}
         </div>
       </div>
->>>>>>> feature/home
     </div>
   );
 };

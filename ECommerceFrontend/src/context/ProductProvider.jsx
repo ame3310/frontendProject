@@ -3,17 +3,6 @@ import { ProductContext } from "./ProductContext";
 
 const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([
-<<<<<<< HEAD
-    { id: 1, name: "Camiseta", price: 19.99, image: "https://via.placeholder.com/150" },
-    { id: 2, name: "Zapatos", price: 49.99, image: "https://via.placeholder.com/150" },
-    { id: 3, name: "Gorra", price: 14.99, image: "https://via.placeholder.com/150" },
-  ]);
-
-const getFeaturedProducts = () => {
-  // Por ahora solo retorna los primeros productos
-  return products.slice(0, 4);
-};
-=======
     {
       id: 1,
       name: "Camiseta básica",
@@ -61,7 +50,6 @@ const getFeaturedProducts = () => {
   const getFeaturedProducts = () => {
     return products.slice(0, 3);
   };
->>>>>>> feature/home
 
   return (
     <ProductContext.Provider value={{ products, getFeaturedProducts }}>

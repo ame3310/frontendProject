@@ -1,24 +1,9 @@
-<<<<<<< HEAD
-import React, { createContext, useState } from "react";
-=======
+
 import React, { createContext, useState, useEffect } from "react";
->>>>>>> feature/home
 
 export const ProductContext = createContext();
 
 const ProductProvider = ({ children }) => {
-<<<<<<< HEAD
-  const [products, setProducts] = useState([
-    { id: 1, name: "Camiseta", price: 19.99, image: "https://via.placeholder.com/150" },
-    { id: 2, name: "Zapatos", price: 49.99, image: "https://via.placeholder.com/150" },
-    { id: 3, name: "Gorra", price: 14.99, image: "https://via.placeholder.com/150" },
-  ]);
-
-  const getFeaturedProducts = () => products.slice(0, 4);
-
-  return (
-    <ProductContext.Provider value={{ products, getFeaturedProducts }}>
-=======
   const initialProducts = [
     {
       id: 1,
@@ -80,7 +65,6 @@ const ProductProvider = ({ children }) => {
 
   return (
     <ProductContext.Provider value={{ products, featuredProducts }}>
->>>>>>> feature/home
       {children}
     </ProductContext.Provider>
   );
