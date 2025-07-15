@@ -15,9 +15,10 @@ export const ProductsProvider = ({ children }) => {
 
   const getProducts = async () => {
     const res = await axios.get(`${API_URL}/products`);
+    const data = res.data.map(p => ({ ...p, id: p.id}))
     dispatch({
       type: 'GET_PRODUCTS',
-      payload: res.data,
+      payload: data,
     });
     return res; 
   };

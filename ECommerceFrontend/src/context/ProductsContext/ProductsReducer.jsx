@@ -14,7 +14,7 @@ const products = (state, action) => {
         return {
           ...state,
           cart: state.cart.map((item) =>
-            item._id === product._id
+            item.id === product.id
               ? { ...item, quantity: (item.quantity || 1) + 1 }
               : item
           ),
@@ -27,20 +27,20 @@ const products = (state, action) => {
       }
     } 
     case "REMOVE_FROM_CART":
-  return {
-    ...state,
-    cart: state.cart.filter((item) => item._id !== action.payload),
-  };
+      return {
+        ...state,
+        cart: state.cart.filter((item) => item.id !== action.payload),
+    };
 
-case "UPDATE_QUANTITY":
-  return {
-    ...state,
-    cart: state.cart.map((item) =>
-      item._id === action.payload.id
-        ? { ...item, quantity: action.payload.quantity }
-        : item
-    ),
-  };
+    case "UPDATE_QUANTITY":
+      return {
+        ...state,
+        cart: state.cart.map((item) =>
+          item._id === action.payload.id
+            ? { ...item, quantity: action.payload.quantity }
+            : item
+          ),
+      };
 
     case "CLEAR_CART":
       return {

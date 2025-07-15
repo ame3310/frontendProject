@@ -22,7 +22,7 @@ const Cart = () => {
   }, [cart])
 
 const cartListData = cart.map(item => ({
-  key: item._id,
+  id: item.id,
   title: item.name,
   price: item.price,
   quantity: item.quantity,
@@ -30,7 +30,7 @@ const cartListData = cart.map(item => ({
     <Popconfirm
       key="delete"
       title="¿Quieres eliminar este producto?"
-      onConfirm={() => removeFromCart(item._id)}  // Aquí _id
+      onConfirm={() => removeFromCart(item.id)}  
       okText="Sí"
       cancelText="No"
     >
@@ -89,7 +89,7 @@ const cartListData = cart.map(item => ({
                   <InputNumber
                     min={1}
                     value={item.quantity}
-                    onChange={(value) => updateQuantity(item.key, value)}
+                    onChange={(value) => updateQuantity(item.id, value)}
                     style={{ width: 70 }}
                   />
                   <Text>

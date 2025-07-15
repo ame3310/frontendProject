@@ -19,6 +19,7 @@ const ProductCard = ({ product}) => {
       style={{ width: 300, margin: '1rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
       actions={[
         <Button type='primary' onClick={() => {
+          console.log(product)
           addCart(product)
         }}>
           Añadir al carrito
