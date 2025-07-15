@@ -1,8 +1,8 @@
-import {Routes, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import AppHeader from './components/Header/Header'
 import AppFooter from './components/Footer/Footer'
-import { OrderProvider } from './context/OrderState/OrderState'
 import Cart from './pages/Cart/Cart'
+import Products from './pages/Products/Products'
 
 function App() {
 
@@ -10,10 +10,10 @@ function App() {
     <>
       <AppHeader />
       <main>
-        <Routes>
+          <Routes>
           {/* <Route path='/' element={<Home/>} />
-          <Route path='/products' element={<Products/>} />
           <Route path='/profile' element={<Profile/>} /> */}
+          <Route path='/products' element={<Products/>} />
           <Route path='/cart' element={<Cart/>} />
           {/* <Route path='/login' element={<Login/>} />
           <Route path='/register' element={<Register/>} /> */}

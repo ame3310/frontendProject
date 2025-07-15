@@ -9,7 +9,7 @@ const OrderProvider = ({children}) => {
     const createOrder = async (order) => {
         const token = JSON.parse(localStorage.getItem('token'))
         const res = await axios.post(
-            API_URL + '/api/orders',
+            API_URL + '/orders',
             { productIds: order},
             {
                 headers: {
