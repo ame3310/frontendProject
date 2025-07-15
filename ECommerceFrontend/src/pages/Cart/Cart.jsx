@@ -3,7 +3,7 @@ import { Divider, List, Button, Typography, InputNumber, Popconfirm, Space } fro
 import { ShoppingCartOutlined, DeleteOutlined } from '@ant-design/icons'
 
 import { ProductsContext } from '../../context/ProductsContext/ProductsState'
-import { OrderContext } from '../../context/OrderContext/OrderState'
+import { OrderContext } from '../../context/OrdersContext/OrdersState'
 
 const { Title, Text } = Typography
 

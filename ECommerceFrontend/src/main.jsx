@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import {ConfigProvider, theme} from 'antd';
 import { ThemeProvider, useTheme } from './context/ThemeContext.jsx';
 import { ProductsProvider } from './context/ProductsContext/ProductsState.jsx';
-import { OrderProvider } from './context/OrderContext/OrderState'
+import { OrderProvider } from './context/OrdersContext/OrdersState'
 import './index.css';
 
 const ThemedApp = () => {

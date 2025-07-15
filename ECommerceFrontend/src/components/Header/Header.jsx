@@ -45,8 +45,9 @@ const AppHeader = () => {
     { label: 'Register', key: '/register', icon: <UserAddOutlined /> },
   ];
 
-  const selectedKey =
-    menuItems.find(item => location.pathname.startsWith(item.key))?.key || '/';
+const selectedKey = menuItems
+  .filter(item => location.pathname.startsWith(item.key))
+  .sort((a, b) => b.key.length - a.key.length)[0]?.key || '/';
 
   const onMenuClick = ({ key }) => {
     navigate(key);
