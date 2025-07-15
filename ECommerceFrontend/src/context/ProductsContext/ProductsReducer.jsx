@@ -36,7 +36,7 @@ const products = (state, action) => {
       return {
         ...state,
         cart: state.cart.map((item) =>
-          item._id === action.payload.id
+          item.id === action.payload.id
             ? { ...item, quantity: action.payload.quantity }
             : item
           ),

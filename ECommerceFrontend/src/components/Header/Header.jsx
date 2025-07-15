@@ -38,11 +38,11 @@ const AppHeader = () => {
 
   const menuItems = [
     { label: 'Home', key: '/', icon: <HomeOutlined /> },
-    { label: 'Products', key: '/products', icon: <AppstoreOutlined /> },
-    { label: 'Profile', key: '/profile', icon: <UserOutlined /> },
-    { label: 'Cart', key: '/cart', icon: <ShoppingCartOutlined /> },
+    { label: 'Productos', key: '/products', icon: <AppstoreOutlined /> },
+    { label: 'Perfil', key: '/profile', icon: <UserOutlined /> },
+    { label: 'Carrito', key: '/cart', icon: <ShoppingCartOutlined /> },
     { label: 'Login', key: '/login', icon: <LoginOutlined /> },
-    { label: 'Register', key: '/register', icon: <UserAddOutlined /> },
+    { label: 'Registrarse', key: '/register', icon: <UserAddOutlined /> },
   ];
 
 const selectedKey = menuItems

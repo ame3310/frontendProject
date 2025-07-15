@@ -10,7 +10,7 @@ const AppFooter = () => {
   return (
     <Footer className={`app-footer ${isDarkMode ? 'dark' : 'light'}`}>
       <div className="footer-content">
-        © 2025 Terminal Goods. All rights reserved.
+        © 2025 Terminal Goods. Proyecto de aprendizaje frontend.
       </div>
     </Footer>
   );
