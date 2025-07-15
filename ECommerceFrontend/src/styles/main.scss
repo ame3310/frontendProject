@@ -1,5 +1,6 @@
-@import 'abstracts/colors';
-@import 'base/reset';
-@import 'base/base';
-@import 'themes/themes';
-@import 'components/header';
+@use "abstracts/colors";
+@use "base/reset";
+@use "base/base";
+@use "themes/themes";
+@use "components/header";
+@use "components/footer";
