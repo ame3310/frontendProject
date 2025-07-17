@@ -1,26 +1,36 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
+html,
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
 }
 
 main {
-  padding-top: 10vh;
+	height: 80vh;
+	margin-top: 10vh;
+	margin-bottom: 5vh;
+	padding: 1rem;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: flex-start;
+	padding: 1rem;
+	box-sizing: border-box;
+	overflow-y: auto;
 }
 
 body {
-  background-color: var(--bg);
-  color: var(--text);
-  transition: background-color 0.1s ease, color 0.1s ease;
+	background-color: var(--bg);
+	color: var(--text);
+	transition: background-color 0.1s ease, color 0.1s ease;
 }
 
 a {
-  color: var(--text);
-  text-decoration: none;
-  transition: color 0.2s ease;
+	color: var(--text);
+	text-decoration: none;
+	transition: color 0.2s ease;
 
-  &:hover {
-    color: var(--primary-light);
-  }
+	&:hover {
+		color: var(--primary-light);
+	}
 }
-

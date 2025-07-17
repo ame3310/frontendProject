@@ -1,36 +1,41 @@
 import { useContext } from 'react'
 import { ProductsContext } from '../../context/ProductsContext/ProductsState'
+import { CartContext } from '../../context/CartContext/CartState';
 import { Card, Tag, Typography, Button } from 'antd';
 const { Title, Paragraph, Text } = Typography;
 
 const ProductCard = ({ product}) => {
-  const { addCart } = useContext(ProductsContext)
+  const { addCart } = useContext(CartContext)
+  const imageUrl = product.images
+    ? `http://localhost:3000/uploads/${product.images}`
+    : './default-product.png';
 
   return (
     <Card
       hoverable
+      className="product-card"
       cover={
         <img
           alt={product.name}
-          src={product.image || "/default-product.png"}
-          style={{ height: 200, objectFit: 'cover' }}
+          src={imageUrl}
         />
       }
-      style={{ width: 300, margin: '1rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
       actions={[
-        <Button type='primary' onClick={() => {
-          console.log(product)
-          addCart(product)
-        }}>
+        <Button
+          type='primary'
+          onClick={() => {
+            addCart(product);
+          }}
+        >
           Añadir al carrito
-        </Button>
-      ]}  
-      >
-      <Title level={4}>{product.name}</Title>
-      <Paragraph>{product.description}</Paragraph>
-      <Text strong>Precio: </Text>
+        </Button>,
+      ]}
+    >
+      <Title level={4} className="product-title">{product.name}</Title>
+      <Paragraph className="product-description">{product.description}</Paragraph>
+      <Text className="product-price">Precio: </Text>
       <Text>{product.price.toFixed(2)} €</Text>
-      <div style={{ marginTop: '0.5rem' }}>
+      <div className="product-tags">
         {product.categories && product.categories.length > 0 ? (
           product.categories.map((c) => (
             <Tag color="blue" key={c.name}>{c.name}</Tag>

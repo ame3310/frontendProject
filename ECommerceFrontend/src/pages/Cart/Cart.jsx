@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useMemo } from 'react'
-import { Divider, Typography, Button, Space } from 'antd'
+import { Divider, Typography, Button, Space, message as antdMessage} from 'antd'
 import { ShoppingCartOutlined } from '@ant-design/icons'
-import { ProductsContext } from '../../context/ProductsContext/ProductsState'
+import { CartContext } from '../../context/CartContext/CartState'
 import { OrderContext } from '../../context/OrdersContext/OrdersState'
 
 import CartList from '../../components/Cart/CartList'
@@ -9,12 +9,13 @@ import CartList from '../../components/Cart/CartList'
 const { Title } = Typography
 
 const CartPage = () => {
+  const [messageApi, contextHolder] = antdMessage.useMessage()
   const {
     cart,
     clearCart,
     removeFromCart,
     updateQuantity,
-  } = useContext(ProductsContext)
+  } = useContext(CartContext)
   const { createOrder } = useContext(OrderContext)
 
   useEffect(() => {
@@ -35,13 +36,20 @@ const CartPage = () => {
     try {
       await createOrder(cart)
       clearCart()
+      message.success('Pedido realizado con éxito 🎉')
     } catch (error) {
       console.error('Error creando pedido', error)
+      if (error.response?.status === 401) {
+        messageApi.error('Oops, necesitas estar logueado para hacer pedidos.', 10)
+      } else {
+        messageApi.error('Error al realizar el pedido. Intentalo de nuevo.', 10)
+      }
     }
   }
 
   return (
     <div className='cart-container'>
+      {contextHolder}
       <Divider orientation='left' className='cart-header'>
         <Title level={3} style={{ margin: 0 }}>
           <ShoppingCartOutlined /> Carrito de Compras

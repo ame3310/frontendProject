@@ -5,8 +5,10 @@ import { BrowserRouter } from 'react-router-dom';
 import {ConfigProvider, theme} from 'antd';
 import { ThemeProvider, useTheme } from './context/ThemeContext.jsx';
 import { ProductsProvider } from './context/ProductsContext/ProductsState.jsx';
+import { CartProvider } from './context/CartContext/CartState.jsx';
 import { OrderProvider } from './context/OrdersContext/OrdersState'
-import './index.css';
+
+import './styles/main.scss';
 
 const ThemedApp = () => {
   const {algorithm} = useTheme();
@@ -25,9 +27,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <ThemeProvider>
         <OrderProvider>
-          <ProductsProvider>
-            <ThemedApp />
-          </ProductsProvider>
+          <CartProvider>
+            <ProductsProvider>
+              <ThemedApp />
+            </ProductsProvider>
+          </CartProvider>
         </OrderProvider>
       </ThemeProvider>
     </BrowserRouter>
