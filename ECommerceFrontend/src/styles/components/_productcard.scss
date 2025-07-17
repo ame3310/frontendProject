@@ -1,5 +1,5 @@
 .product-card {
-	width: 280px;
+	width: 260px;
 	max-height: 400px;
 	margin: 1rem;
 	display: flex;
@@ -29,6 +29,9 @@
 	.product-tags {
 		margin-top: 0.5rem;
 	}
+	&:hover {
+		transform: translateY(-4px);
+	}
 }
 
 .products-page {
@@ -36,7 +39,14 @@
 	gap: 2rem;
 	padding: 2rem;
 	align-items: flex-start;
-
+	.products-page .products-grid {
+		flex: 1; /* Que crezca para ocupar espacio */
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		gap: 2rem;
+		justify-items: center;
+		margin-bottom: 3rem;
+	}
 	.products-list {
 		flex: 1;
 		display: flex;

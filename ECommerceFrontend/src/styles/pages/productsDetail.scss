@@ -1,0 +1,38 @@
+.product-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background-color: var(--bg);
+  color: var(--text);
+
+  img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    margin-bottom: 2rem;
+    object-fit: contain;
+  }
+
+  &__info {
+    max-width: 600px;
+    text-align: center;
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+
+      strong {
+        font-weight: 600;
+        color: var(--primary-light);
+      }
+    }
+  }
+}
