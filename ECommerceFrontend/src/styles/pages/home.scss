@@ -1,7 +1,11 @@
 .home {
+  margin-top: 100vh;
+  max-width: 1200px;
+  padding-top: calc(10vh + 2rem);
+  padding-left: 2rem;
+  padding-right: 2rem;
   background-color: var(--bg);
   color: var(--text);
-  padding: 2rem;
 
   .hero {
     text-align: center;
@@ -27,6 +31,7 @@
       text-decoration: none;
       border-radius: 8px;
       font-weight: bold;
+      transition: background-color 0.3s ease;
 
       &:hover {
         background-color: var(--primary-light);
@@ -43,7 +48,7 @@
 
     .product-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 2rem;
     }
 
@@ -56,7 +61,7 @@
       transition: transform 0.2s ease;
 
       &:hover {
-        transform: translateY(-4px);
+        transform: translateY(-5px);
       }
 
       img {
@@ -84,6 +89,8 @@
         color: #fff;
         text-decoration: none;
         border-radius: 6px;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
 
         &:hover {
           background-color: var(--primary-light);
@@ -93,7 +100,7 @@
   }
 
   .error {
-    color: red;
+    color: #f44336;
     text-align: center;
     margin-top: 1rem;
   }

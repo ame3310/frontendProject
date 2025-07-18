@@ -5,7 +5,9 @@ import ProductsReducer from "./ProductsReducer";
 const initialState = {
   products: [],
   error: null,
+  favorites: [], 
 };
+
 
 export const ProductsContext = createContext(initialState);
 
@@ -30,12 +32,18 @@ export const ProductsProvider = ({ children }) => {
     }
   };
 
-  return (
+    const toggleFavorite = (productId) => {
+    dispatch({ type: "TOGGLE_FAVORITE", payload: productId });
+  };
+
+ return (
     <ProductsContext.Provider
       value={{
         products: state.products,
         error: state.error,
+        favorites: state.favorites,
         getProducts,
+        toggleFavorite,
       }}
     >
       {children}

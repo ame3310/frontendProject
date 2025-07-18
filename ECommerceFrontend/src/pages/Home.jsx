@@ -1,53 +1,63 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getProducts } from "../utils/api";
+import "../styles/pages/home.scss";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetch = async () => {
+    const fetchProducts = async () => {
       try {
-        const res = await getProducts();
-        setProducts(res.slice(0, 6));
-      } catch (err) {
-        console.error("Error al cargar productos", err);
+        const data = await getProducts();
+        console.log("Productos cargados en Home:", data);
+        setProducts(data);
+      } catch (error) {
+        console.error("Error cargando productos:", error);
+        setError("Error cargando productos");
       }
     };
-    fetch();
+
+    fetchProducts();
   }, []);
 
   return (
-    <main className="home">
-      <section className="home_hero">
-        <div className="home_hero-text">
-          <h1>
-            Bienvenido a <span>Terminal Goods</span>
-          </h1>
-          <p>Explora productos tecnológicos únicos al mejor precio.</p>
-          <Link to="/products" className="btn-primary">
-            Ver productos
-          </Link>
-        </div>
-        <img src="/hero-image.jpg" alt="Hero" className="home_hero-img" />
-      </section>
-
-      <section className="home_featured">
-        <h2>Productos Destacados</h2>
-        <div className="home_products-grid">
-          {products.length === 0 ? (
-            <p>Cargando productos...</p>
-          ) : (
-            products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))
-          )}
-        </div>
-        <Link to="/products" className="btn-secondary">
-          Ver todos los productos
+    <div className="home">
+      <section className="hero">
+        <h1>Welcome to Our E-commerce</h1>
+        <p>Discover amazing products at the best prices</p>
+        <Link to="/products" className="btn-primary">
+          View Products
         </Link>
       </section>
-    </main>
+
+      <section className="featured">
+        <h2>Featured Products</h2>
+        <div className="product-grid">
+          {error && <p className="error">{error}</p>}
+          {!error && products.length === 0 && <p>No products available.</p>}
+          {products.map((product) => (
+            <div className="product-card" key={product.id}>
+ <img
+  src={`http://localhost:3000/uploads/${product.image ?? "placeholder.jpg"}`}
+  alt={product.name}
+  onError={(e) => {
+    e.target.onerror = null; 
+    e.target.src = "http://localhost:3000/uploads/mario.jpg"; 
+  }}
+/>
+
+              <h3>{product.name}</h3>
+             <p>${product.price ? product.price.toFixed(2) : "N/A"}</p>
+              <Link to={`/products/${product.id}`} className="btn-secondary">
+                View Details
+              </Link>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
   );
 };
 
