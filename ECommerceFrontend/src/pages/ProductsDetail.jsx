@@ -32,7 +32,7 @@ const ProductDetail = () => {
   const handleReviewAdded = (newReview) => {
     const reviewWithMeta = {
       ...newReview,
-      id: Date.now(), // ID único local
+      id: Date.now(), 
       likes: 0,
       username: "UsuarioDemo",
     };
@@ -71,4 +71,3 @@ const ProductDetail = () => {
 };
 
 export default ProductDetail;
-

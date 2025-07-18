@@ -8,7 +8,6 @@ const initialState = {
   favorites: [], 
 };
 
-
 export const ProductsContext = createContext(initialState);
 
 const API_URL = "http://localhost:3000/api";
@@ -50,3 +49,4 @@ export const ProductsProvider = ({ children }) => {
     </ProductsContext.Provider>
   );
 };
+

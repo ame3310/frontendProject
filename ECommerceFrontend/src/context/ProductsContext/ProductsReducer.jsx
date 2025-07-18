@@ -1,3 +1,4 @@
+
 const ProductsReducer = (state, action) => {
   switch (action.type) {
     case "GET_PRODUCTS":
