@@ -3,7 +3,8 @@ import AppHeader from './components/Header/Header'
 import AppFooter from './components/Footer/Footer'
 import Home from './pages/Home'
 // import Cart from './pages/Cart/Cart'
-// import Products from './pages/Products/Products'
+import Products from './pages/Products'
+// import Profile from './pages/Profile'
 
 function App() {
   return (
@@ -12,8 +13,8 @@ function App() {
       <main>
         <Routes>
           <Route path='/' element={<Home />} />
-          {/* <Route path='/profile' element={<Profile/>} /> */}
-          {/* <Route path='/products' element={<Products/>} /> */}
+          {/* <Route path='/profile' element={<Profile />} /> */}
+          <Route path='/products' element={<Products />} />
           {/* <Route path='/cart' element={<Cart/>} /> */}
           {/* <Route path='/login' element={<Login/>} />
           <Route path='/register' element={<Register/>} /> */}
