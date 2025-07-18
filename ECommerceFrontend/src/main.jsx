@@ -4,9 +4,9 @@ import App from './App.jsx'
 import {BrowserRouter} from 'react-router-dom'
 import {ConfigProvider, theme} from 'antd'
 import {ThemeProvider, useTheme} from './context/ThemeContext.jsx'
-// import { ProductsProvider } from './context/ProductsContext/ProductsState.jsx';
-// import { OrderProvider } from './context/OrdersContext/OrdersState'
-// import './index.css';
+import { ProductsProvider } from './context/ProductsContext/ProductsState.jsx';
+import { OrderProvider } from './context/OrdersContext/OrdersState'
+import { CartProvider } from './context/CartContext/CartState.jsx'
 import './assets/styles/main.scss'
 
 const ThemedApp = () => {
@@ -25,11 +25,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider>
-        {/* <OrderProvider> */}
-        {/* <ProductsProvider> */}
-        <ThemedApp />
-        {/* </ProductsProvider> */}
-        {/* </OrderProvider> */}
+        <OrderProvider> 
+          <CartProvider>
+            <ProductsProvider> 
+              <ThemedApp />
+            </ProductsProvider> 
+          </CartProvider>
+        </OrderProvider> 
       </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>

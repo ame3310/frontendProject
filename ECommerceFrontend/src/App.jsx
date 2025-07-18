@@ -2,9 +2,8 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import AppHeader from './components/Header/Header'
 import AppFooter from './components/Footer/Footer'
 import Home from './pages/Home'
-// import Cart from './pages/Cart/Cart'
+import Cart from './pages/Cart/Cart'
 import Products from './pages/Products'
-// import Profile from './pages/Profile'
 
 function App() {
   return (
@@ -15,7 +14,7 @@ function App() {
           <Route path='/' element={<Home />} />
           {/* <Route path='/profile' element={<Profile />} /> */}
           <Route path='/products' element={<Products />} />
-          {/* <Route path='/cart' element={<Cart/>} /> */}
+          <Route path='/cart' element={<Cart/>} />
           {/* <Route path='/login' element={<Login/>} />
           <Route path='/register' element={<Register/>} /> */}
         </Routes>
