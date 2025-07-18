@@ -99,12 +99,3 @@ npm run dev
 - Maider [@Maiderspb](https://www.github.com/Maiderspb)
 
 - Paula [@PaulaVegas](https://www.github.com/PaulaVegas)
-
-
-# Authors
-
-- Ametz [@Ame3310](https://www.github.com/Ame3310)
-
-- Maider [@Maiderspb](https://www.github.com/Maiderspb)
-
-- Paula [@PaulaVegas](https://www.github.com/PaulaVegas)
