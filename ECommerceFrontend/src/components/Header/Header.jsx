@@ -16,7 +16,7 @@ import {
 } from '@ant-design/icons'
 import {useNavigate, useLocation} from 'react-router-dom'
 import {useTheme} from '../../context/ThemeContext'
-// import "../../styles/main.scss";
+
 const {Header} = Layout
 
 const AppHeader = () => {
