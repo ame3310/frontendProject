@@ -8,7 +8,8 @@ import '../assets/styles/pages/products.scss'
 import { CartContext } from '../context/CartContext/CartState.jsx'
 
 const Products = () => {
-  const [products, setProducts] = useState([])
+  const [allProducts, setAllProducts] = useState([])
+  const [filteredProducts, setFilteredProducts] = useState([])
   const [searchParams, setSearchParams] = useSearchParams()
   const { addCart, cart, removeFromCart, updateQuantity,clearCart } = useContext(CartContext)
   const navigate = useNavigate()
@@ -20,28 +21,47 @@ const Products = () => {
 
   useEffect(() => {
     const fetch = async () => {
-      const filters = {
-        name: search,
-        minPrice: priceMin || undefined,
-        maxPrice: priceMax || undefined,
-      }
       try {
-        const res = await getProducts(filters)
-        setProducts(res)
+        const res = await getProducts() 
+        setAllProducts(res)
+        setFilteredProducts(res)
       } catch (err) {
         console.error('Error cargando productos', err)
       }
     }
     fetch()
-  }, [search, priceMin, priceMax])
+  }, [])
 
-  const updateParam = (key, value) => {
+  useEffect(() => {
+    let filtered = allProducts
+
+    if (search) {
+      filtered = filtered.filter(p =>
+        p.name.toLowerCase().includes(search.toLowerCase())
+      )
+    }
+
+    if (priceMin) {
+      filtered = filtered.filter(p => p.price >= Number(priceMin))
+    }
+
+    if (priceMax) {
+      filtered = filtered.filter(p => p.price <= Number(priceMax))
+    }
+
+    setFilteredProducts(filtered)
+  }, [search, priceMin, priceMax, allProducts])
+
+    const updateParam = (key, value) => {
     const newParams = new URLSearchParams(searchParams)
-    if (value) newParams.set(key, value)
-    else newParams.delete(key)
+    if (value) {
+      newParams.set(key, value)
+    } else {
+      newParams.delete(key)
+    }
     setSearchParams(newParams)
   }
-
+  
   const handleAddToCart = (product) => {
     addCart(product)
   }
@@ -93,10 +113,10 @@ const Products = () => {
         </div>
 
         <div className={`products-grid ${cart.length > 0 ? 'with-sidebar' : ''}`}>
-          {products.length === 0 ? (
+          {filteredProducts.length === 0 ? (
             <p>No hay productos disponibles.</p>
           ) : (
-            products.map(p => (
+            filteredProducts.map(p => (
               <div key={p.id} className="product-wrapper">
                 <ProductCard product={p} size="large" onAddToCart={handleAddToCart}/>
               </div>
