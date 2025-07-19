@@ -1,14 +1,15 @@
-import React, {useEffect, useState} from 'react'
-import {useSearchParams} from 'react-router-dom'
-import {getProducts} from '../utils/api'
+import React, { useEffect, useState, useContext } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import { getProducts } from '../utils/api'
 import ProductCard from '../components/ProductCard.jsx'
 import SearchBar from '../components/SearchBar.jsx'
 import '../assets/styles/pages/products.scss'
+import { CartContext } from '../context/CartContext/CartState.jsx'
 
 const Products = () => {
   const [products, setProducts] = useState([])
   const [searchParams, setSearchParams] = useSearchParams()
-
+  const { addCart } = useContext(CartContext)
   const search = searchParams.get('search') || ''
   const priceMin = searchParams.get('minPrice') || ''
   const priceMax = searchParams.get('maxPrice') || ''
@@ -38,6 +39,10 @@ const Products = () => {
     setSearchParams(newParams)
   }
 
+  const handleAddToCart = (product) => {
+    addCart(product)
+  }
+
   return (
     <div className='products-page'>
       <h2>Todos los productos</h2>
@@ -65,7 +70,12 @@ const Products = () => {
         {products.length === 0 ? (
           <p>No hay productos disponibles.</p>
         ) : (
-          products.map((p) => <ProductCard key={p.id} product={p} />)
+          products.map(p => (
+            <div key={p.id} className="product-wrapper">
+              <ProductCard product={p} />
+              <button onClick={() => handleAddToCart(p)}>Añadir al carrito</button>
+            </div>
+          ))
         )}
       </div>
     </div>
