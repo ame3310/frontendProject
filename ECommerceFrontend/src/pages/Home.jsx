@@ -7,18 +7,18 @@ const Home = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const data = await getProducts();
-        console.log("Productos cargados en Home:", data);
-        setProducts(data);
-      } catch (error) {
-        console.error("Error cargando productos:", error);
-        setError("Error cargando productos");
-      }
-    };
+const fetchProducts = async () => {
+    try {
+      const data = await getProducts();
+      console.log("Productos cargados en Home:", data);
+      setProducts(data);
+    } catch (error) {
+      console.error("Error cargando productos:", error);
+      setError("Error cargando productos");
+    }
+  };
 
+  useEffect(() => {
     fetchProducts();
   }, []);
 
