@@ -1,10 +1,9 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Header from "./components/Header.jsx";
+import Header from "./components/Header/Header.jsx";
 import Home from "./pages/Home.jsx";
 import Products from "./pages/Products.jsx";
 import ProductDetails from "./pages/ProductsDetail.jsx";
-
 import "./App.css";
 
 function App() {
@@ -20,3 +19,4 @@ function App() {
   );
 }
 
+export default App;
