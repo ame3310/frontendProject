@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProductById } from "../utils/api";
-// import "../styles/pages/productsDetail.scss";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -23,10 +22,10 @@ const ProductDetail = () => {
 
   return (
     <div className="product-detail">
-     <img
-  src={`http://localhost:3000/uploads/${product.images?.[0] ?? 'placeholder.jpg'}`}
-  alt={product.name}
-/>
+      <img
+        src={`http://localhost:3000/uploads/${product.images?.[0] ?? 'placeholder.jpg'}`}
+        alt={product.name}
+      />
       <div className="product-detail__info">
         <h2>{product.name}</h2>
         <p>{product.description}</p>
@@ -34,7 +33,23 @@ const ProductDetail = () => {
           <strong>Precio:</strong> {product.price} €
         </p>
       </div>
-    </div>
+
+      <section className="product-detail__reviews">
+        <h3>Reseñas</h3>
+          {product.reviews && product.reviews.length > 0 ? (
+            <ul>   
+              {product.reviews.map((review) => (
+                <li key={review.id} className="review">
+                  <p><strong>{review.user}</strong> - {review.rating} ⭐</p>
+                  <p>{review.comment}</p>
+                </li>
+                ))}
+            </ul>
+          ) : (
+            <p>No hay reseñas para este producto.</p>
+            )}
+        </section>
+      </div>       
   );
 };
 

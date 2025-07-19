@@ -31,7 +31,6 @@ const Home = () => {
             Ver productos
           </Link>
         </div>
-        <img src='/hero-image.jpg' alt='Hero' className='home_hero-img' />
       </section>
 
       <section className='home__featured'>
@@ -42,7 +41,7 @@ const Home = () => {
             <p>Cargando productos...</p>
           ) : (
             products.map((product) => (
-              <ProductCard key={product.id} product={product} size="large"/>
+              <ProductCard key={product.id} product={product} size="large" hideAddToCart/>
             ))
           )}
         </div>
