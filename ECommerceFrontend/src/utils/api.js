@@ -11,11 +11,9 @@ export const getProducts = async (filters = {}) => {
 
 	const params = new URLSearchParams(mappedFilters).toString();
 	const url = `${API_URL}/products?${params}`;
-	console.log("[API] URL generada:", url);
 
 	try {
 		const response = await axios.get(url);
-		console.log("[API] Datos recibidos:", response.data);
 		return response.data;
 	} catch (err) {
 		console.error("[API] Error al obtener productos:", err.message);

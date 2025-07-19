@@ -7,6 +7,7 @@ import {ThemeProvider, useTheme} from './context/ThemeContext.jsx'
 import { ProductsProvider } from './context/ProductsContext/ProductsState.jsx';
 import { OrderProvider } from './context/OrdersContext/OrdersState'
 import { CartProvider } from './context/CartContext/CartState.jsx'
+import { AdminProvider } from './context/AdminContext/AdminState.jsx'
 
 import './assets/styles/main.scss'
 
@@ -26,13 +27,15 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider>
-        <OrderProvider> 
-          <CartProvider>
-            <ProductsProvider> 
-              <ThemedApp />
-            </ProductsProvider> 
-          </CartProvider>
-        </OrderProvider> 
+        <AdminProvider>
+          <OrderProvider> 
+            <CartProvider>
+              <ProductsProvider> 
+                <ThemedApp />
+              </ProductsProvider> 
+            </CartProvider>
+          </OrderProvider>
+        </AdminProvider>
       </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>

@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Cart from './pages/Cart/Cart'
 import Products from './pages/Products'
 import ProductDetail from './pages/ProductsDetail'
+import AdminPanel from './pages/Admin/Admin'
 
 function App() {
   return (
@@ -19,9 +20,10 @@ function App() {
           <Route path='/products/:id' element={<ProductDetail />} />
           {/* <Route path='/login' element={<Login/>} />
           <Route path='/register' element={<Register/>} /> */}
+          <Route path='/admin' element={<AdminPanel />} /> 
         </Routes>
       </main>
-      <AppFooter />
+      <AppFooter />  
     </>
   )
 }
