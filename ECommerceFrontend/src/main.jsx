@@ -7,6 +7,7 @@ import {ThemeProvider, useTheme} from './context/ThemeContext.jsx'
 import { ProductsProvider } from './context/ProductsContext/ProductsState.jsx';
 import { OrderProvider } from './context/OrdersContext/OrdersState'
 import { CartProvider } from './context/CartContext/CartState.jsx'
+
 import './assets/styles/main.scss'
 
 const ThemedApp = () => {
