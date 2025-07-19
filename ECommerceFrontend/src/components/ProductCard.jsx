@@ -1,13 +1,11 @@
 import { Link } from "react-router-dom";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, size = 'medium' }) => {
   return (
-    <div className="product-card">
+    <div className={`product-card product-${size}`}>
       <img
         src={`http://localhost:3000/uploads/${product.images?.[0] ?? 'placeholder.jpg'}`}
         alt={product.name}
-        width="150"
-        height="150"
       />
       <h3>{product.name}</h3>
       <p>{product.description}</p>
