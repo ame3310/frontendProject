@@ -22,6 +22,7 @@ axiosInstance.interceptors.response.use(
     const isNotAuthEndpoint =
       !originalRequest.url.includes("/auth/login") &&
       !originalRequest.url.includes("/auth/refresh");
+      //añadir carrito, necesita el token del user!
 
     if (is401 && isNotAuthEndpoint && !originalRequest._retry) {
       console.log("[Interceptor] Token expirado. Intentando refrescar...");

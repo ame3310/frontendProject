@@ -21,7 +21,7 @@ const ReviewsList = ({ reviews, onEdit, onDelete }) => {
             color: "#fff",
           }}>
           <Box>
-            <Typography fontWeight="bold">{r.rating} estrellas</Typography>
+            <Typography fontWeight="bold">{"⭐".repeat(r.rating)}</Typography>
             <Typography variant="body2">{r.comment}</Typography>
           </Box>
 
