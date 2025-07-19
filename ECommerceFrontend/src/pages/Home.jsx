@@ -42,7 +42,7 @@ const Home = () => {
             <p>Cargando productos...</p>
           ) : (
             products.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard key={product.id} product={product} size="large"/>
             ))
           )}
         </div>

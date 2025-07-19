@@ -4,7 +4,7 @@ import AppFooter from './components/Footer/Footer'
 import Home from './pages/Home'
 import Cart from './pages/Cart/Cart'
 import Products from './pages/Products'
-
+import ProductDetail from './pages/ProductsDetail'
 
 function App() {
   return (
@@ -16,6 +16,7 @@ function App() {
           {/* <Route path='/profile' element={<Profile />} /> */}
           <Route path='/products' element={<Products />} />
           <Route path='/cart' element={<Cart/>} />
+          <Route path='/products/:id' element={<ProductDetail />} />
           {/* <Route path='/login' element={<Login/>} />
           <Route path='/register' element={<Register/>} /> */}
         </Routes>

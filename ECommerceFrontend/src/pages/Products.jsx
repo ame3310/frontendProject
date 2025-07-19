@@ -72,7 +72,7 @@ const Products = () => {
         ) : (
           products.map(p => (
             <div key={p.id} className="product-wrapper">
-              <ProductCard product={p} />
+              <ProductCard product={p} size="large"/>
               <button onClick={() => handleAddToCart(p)}>Añadir al carrito</button>
             </div>
           ))
