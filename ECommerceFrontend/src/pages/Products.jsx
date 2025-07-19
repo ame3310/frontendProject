@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { getProducts } from "../utils/api";
-import ProductCard from "../components/ProductCard.jsx";
-import SearchBar from "../components/SearchBar.jsx"; 
-import "../styles/pages/products.scss";
+import React, { useEffect, useState, useContext } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import { getProducts } from '../utils/api'
+import ProductCard from '../components/ProductCard.jsx'
+import SearchBar from '../components/SearchBar.jsx'
+import '../assets/styles/pages/products.scss'
+import { CartContext } from '../context/CartContext/CartState.jsx'
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -23,7 +24,7 @@ const Products = () => {
           return matchSearch && matchPrice;
         });
         setProducts(filtered);
-      } catch (error) {
+      } catch (error) {0
         console.error("Error al cargar productos:", error);
       }
     };
@@ -34,7 +35,6 @@ const Products = () => {
  const handleFilter = ({ search, priceMin, priceMax }) => {
   const params = {};
   if (search) params.search = search;
-
   const min = parseFloat(priceMin);
   const max = parseFloat(priceMax);
 

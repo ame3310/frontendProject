@@ -61,4 +61,4 @@ const fetchProducts = async () => {
   );
 };
 
-export default Home;
+export default Home
