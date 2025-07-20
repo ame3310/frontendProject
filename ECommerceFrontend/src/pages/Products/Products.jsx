@@ -4,7 +4,7 @@ import { getProducts } from '../../utils/api.js'
 import ProductCard from '../../components/ProductCard.jsx'
 import SearchBar from '../../components/SearchBar.jsx'
 import CartList from '../../components/Cart/CartList.jsx'
-import '../assets/styles/pages/products.scss'
+import '../../assets/styles/pages/products.scss'
 import { CartContext } from '../../context/CartContext/CartState.jsx'
 
 const Products = () => {

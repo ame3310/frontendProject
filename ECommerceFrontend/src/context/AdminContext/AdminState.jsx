@@ -1,85 +1,97 @@
 import { createContext, useReducer } from "react";
 import axios from "axios";
 import AdminReducer from "./AdminReducer";
+import axiosInstance from "../../utils/axiosInstance";
 
 const initialState = {
     users: [],
     orders: [],
     products: [],
+    categories: [],
     error: null,
 };
 
 export const AdminContext = createContext(initialState);
-
-const API_URL = "http://localhost:3000/api";
-const token = localStorage.getItem("token");
-const api = axios.create({
-    baseURL: API_URL,
-    headers: {
-        Authorization: token ? `Bearer ${token}` : "",
-    },
-    });
 
 export const AdminProvider = ({ children }) => {
     const [state, dispatch] = useReducer(AdminReducer, initialState);
 
     const getUsers = async () => {
         try {
-        const res = await api.get("/users");
-        dispatch({ type: "GET_USERS", payload: res.data });
+            const res = await axiosInstance.get("/users");
+            dispatch({ type: "GET_USERS", payload: res.data });
         } catch (err) {
-        dispatch({ type: "ADMIN_ERROR", payload: err.message });
-        console.error("Error cargando usuarios:", err.message);
+            dispatch({ type: "ADMIN_ERROR", payload: err.message });
+            console.error("Error cargando usuarios:", err.message);
         }
     };
 
     const getOrders = async () => {
         try {
-        const res = await api.get("/orders");
-        dispatch({ type: "GET_ORDERS", payload: res.data });
+            const res = await axiosInstance.get("/orders");
+            dispatch({ type: "GET_ORDERS", payload: res.data });
         } catch (err) {
-        dispatch({ type: "ADMIN_ERROR", payload: err.message });
-        console.error("Error cargando pedidos:", err.message);
+            dispatch({ type: "ADMIN_ERROR", payload: err.message });
+            console.error("Error cargando pedidos:", err.message);
         }
     };
 
     const getProducts = async () => {
         try {
-        const res = await api.get("/products");
-        dispatch({ type: "GET_PRODUCTS", payload: res.data });
+            const res = await axiosInstance.get("/products");
+            dispatch({ type: "GET_PRODUCTS", payload: res.data });
         } catch (err) {
-        dispatch({ type: "ADMIN_ERROR", payload: err.message });
-        console.error("Error cargando productos:", err.message);
+            dispatch({ type: "ADMIN_ERROR", payload: err.message });
+            console.error("Error cargando productos:", err.message);
+        }
+    };
+    const getCategories = async () => {
+        try {
+            const res = await axiosInstance.get("/categories");
+            dispatch({ type: "GET_CATEGORIES", payload: res.data });
+        } catch (err) {
+            dispatch({ type: "ADMIN_ERROR", payload: err.message });
+            console.error("Error cargando categorías:", err.message);
         }
     };
 
     const addProduct = async (newProductData) => {
-    try {
-        const res = await api.post('/products', newProductData);
-        dispatch({ type: 'ADD_PRODUCT', payload: res.data });
-    } catch (err) {
-        dispatch({ type: 'ADMIN_ERROR', payload: err.message });
-        console.error('Error añadiendo producto:', err.message);
+        try {
+            const res = await axiosInstance.post('/products', newProductData);
+            dispatch({ type: 'ADD_PRODUCT', payload: res.data });
+        } catch (err) {
+            dispatch({ type: 'ADMIN_ERROR', payload: err.message });
+            console.error('Error añadiendo producto:', err.message);
         }
     };
 
-    const updateUser = async (id, updatedData) => {
+    const updateUser = async (userData) => {
         try {
-        const res = await api.put(`/users/${id}`, updatedData);
-        dispatch({ type: "UPDATE_USER", payload: res.data });
+            const res = await axiosInstance.patch(`/users/profile`, userData);
+            dispatch({ type: "UPDATE_USER", payload: res.data });
         } catch (err) {
-        dispatch({ type: "ADMIN_ERROR", payload: err.message });
-        console.error("Error actualizando usuario:", err.message);
+            dispatch({ type: "ADMIN_ERROR", payload: err.message });
+            console.error("Error actualizando usuario:", err.message);
         }
     };
 
     const updateProduct = async (id, updatedData) => {
         try {
-        const res = await api.put(`/products/${id}`, updatedData);
-        dispatch({ type: "UPDATE_PRODUCT", payload: res.data });
+            const res = await axiosInstance.patch(`/products/${id}`, updatedData);
+            dispatch({ type: "UPDATE_PRODUCT", payload: res.data });
         } catch (err) {
-        dispatch({ type: "ADMIN_ERROR", payload: err.message });
-        console.error("Error actualizando producto:", err.message);
+            dispatch({ type: "ADMIN_ERROR", payload: err.message });
+            console.error("Error actualizando producto:", err.message);
+        }
+    };
+
+    const deleteUser = async (id) => {
+        try {
+            await axiosInstance.delete(`/users/${id}`);
+            dispatch({ type: "DELETE_USER", payload: id });
+        } catch (err) {
+            dispatch({ type: "ADMIN_ERROR", payload: err.message });
+            console.error("Error borrando usuario:", err.message);
         }
     };
 
@@ -96,6 +108,9 @@ export const AdminProvider = ({ children }) => {
                 addProduct,
                 updateUser, 
                 updateProduct,
+                deleteUser,
+                categories: state.categories,
+                getCategories,
             }}
         >
         {children}

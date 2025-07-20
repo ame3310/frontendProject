@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
-import {getProducts} from '../utils/api'
-import ProductCard from '../components/ProductCard'
+import {getProducts} from '../../utils/api'
+import ProductCard from '../../components/ProductCard'
 import './home.scss'
 
 const Home = () => {
