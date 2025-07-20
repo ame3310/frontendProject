@@ -1,0 +1,65 @@
+import { List, Typography, InputNumber, Popconfirm, Button } from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
+
+const { Text } = Typography;
+
+const CartItem = ({ item, onRemove, onQuantityChange, compact = false }) => {
+  return (
+    <List.Item
+      className={`cart-list-item ${compact ? "compact" : ""}`}
+      actions={[
+        <Popconfirm
+          title="¿Quieres eliminar este producto?"
+          onConfirm={() => onRemove(item.id)}
+          okText="Sí"
+          cancelText="No">
+          <Button
+            danger
+            icon={<DeleteOutlined />}
+            size={compact ? "small" : "middle"}
+          />
+        </Popconfirm>,
+      ]}>
+      <List.Item.Meta
+        title={<Text className="product-title">{item.title}</Text>}
+        description={
+          compact ? (
+            <div className="subtotal">
+              <Text>
+                Subtotal:{" "}
+                <Text strong>{(item.price * item.quantity).toFixed(2)} €</Text>
+              </Text>
+            </div>
+          ) : (
+            <div className="product-details">
+              <div className="price">
+                <Text>
+                  Precio: <Text strong>{item.price.toFixed(2)} €</Text>
+                </Text>
+              </div>
+              <div className="quantity">
+                <Text>Cantidad:</Text>
+                <InputNumber
+                  min={1}
+                  value={item.quantity}
+                  onChange={(value) => onQuantityChange(item.id, value)}
+                  style={{ width: 70 }}
+                />
+              </div>
+              <div className="subtotal">
+                <Text>
+                  Subtotal:{" "}
+                  <Text strong>
+                    {(item.price * item.quantity).toFixed(2)} €
+                  </Text>
+                </Text>
+              </div>
+            </div>
+          )
+        }
+      />
+    </List.Item>
+  );
+};
+
+export default CartItem;
