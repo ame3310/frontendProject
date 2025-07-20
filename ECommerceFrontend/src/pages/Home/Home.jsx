@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
-import {getProducts} from '../utils/api'
-import ProductCard from '../components/ProductCard'
+import {getProducts} from '../../utils/api'
+import ProductCard from '../../components/ProductCard'
 import './home.scss'
 
 const Home = () => {
@@ -31,24 +31,19 @@ const Home = () => {
             Ver productos
           </Link>
         </div>
-        <img src='/hero-image.jpg' alt='Hero' className='home_hero-img' />
       </section>
 
       <section className='home__featured'>
         <h2>Productos Destacados</h2>
-
         <div className='home__product-grid'>
           {products.length === 0 ? (
             <p>Cargando productos...</p>
           ) : (
             products.map((product) => (
-              <ProductCard key={product.id} product={product} size="large"/>
+              <ProductCard key={product.id} product={product} size="medium" hideAddToCart/>
             ))
           )}
         </div>
-        <Link to='/products' className='btn-secondary'>
-          Ver todos los productos
-        </Link>
       </section>
     </main>
   )

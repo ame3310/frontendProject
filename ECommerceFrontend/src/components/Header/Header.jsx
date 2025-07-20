@@ -1,7 +1,5 @@
-import {Link, NavLink} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import {Grid, Layout, Menu, Drawer, Button} from 'antd'
-import {AiOutlineHome} from 'react-icons/ai'
 import {
   HomeOutlined,
   ShoppingCartOutlined,
@@ -14,18 +12,19 @@ import {
   BulbOutlined,
   MoonOutlined,
 } from '@ant-design/icons'
-import {useNavigate, useLocation} from 'react-router-dom'
-import {useTheme} from '../../context/ThemeContext'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { useTheme } from '../../context/ThemeContext'
+import { useAuth } from '../../context/AuthContext/AuthContext'
 
-const {Header} = Layout
+const { Header } = Layout
 
 const AppHeader = () => {
-  const screens = Grid.useBreakpoint()
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
   const {isDarkMode, toggleTheme} = useTheme()
   const [drawerVisible, setDrawerVisible] = useState(false)
   const navigate = useNavigate()
   const location = useLocation()
+  const user = useAuth()?.user
 
   useEffect(() => {
     const handleResize = () => {
@@ -43,7 +42,10 @@ const AppHeader = () => {
     {label: 'Carrito', key: '/cart', icon: <ShoppingCartOutlined />},
     {label: 'Login', key: '/login', icon: <LoginOutlined />},
     {label: 'Registrarse', key: '/register', icon: <UserAddOutlined />},
-  ]
+    ...(user && user.role === 'admin'
+    ? [{ label: 'Admin', key: '/admin', icon: <UserOutlined /> }]
+    : []),
+    ]
 
   const selectedKey =
     menuItems
