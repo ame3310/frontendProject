@@ -94,7 +94,14 @@ export const AdminProvider = ({ children }) => {
             console.error("Error borrando usuario:", err.message);
         }
     };
-
+    const getUser = async (userId) => {
+    try {
+        const response = await api.get(`/users/${userId}`);
+        dispatch({ type: 'GET_USER', payload: response.data });
+    } catch (error) {
+        console.error(error);
+    }
+    };
     return (
         <AdminContext.Provider
             value={{
@@ -111,6 +118,7 @@ export const AdminProvider = ({ children }) => {
                 deleteUser,
                 categories: state.categories,
                 getCategories,
+                getUser,
             }}
         >
         {children}

@@ -36,23 +36,19 @@ const CartPage = () => {
   [cart])
 
   const createNewOrder = async () => {
-      try {
-        await createOrder(cart)
-        clearCart()
-        setTimeout(() => {
-        message.success('Pedido realizado con éxito')
-        }, 0)
-      } catch (error) {
-        console.error('Error creando pedido', error)
-        setTimeout(() => {
-        if (error.response?.status === 401) {
-          messageApi.error('Oops, necesitas estar logueado para hacer pedidos.', 10)
-        } else {
-          messageApi.error('Error al realizar el pedido. Intentalo de nuevo.', 10)
-        }
-      }, 0)
+    try {
+      await createOrder(cart);
+      clearCart();
+      messageApi.success('Pedido realizado con éxito');
+    } catch (error) {
+      console.error('Error creando pedido', error);
+      if (error.response?.status === 401) {
+        messageApi.error('Oops, necesitas estar logueado para hacer pedidos.', 10);
+      } else {
+        messageApi.error('Error al realizar el pedido. Inténtalo de nuevo.', 10);
+      }
     }
-  }  
+  };
 
   return (
     <div className='cart-container'>

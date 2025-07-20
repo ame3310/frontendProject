@@ -1,18 +1,31 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { AdminContext } from '../../context/AdminContext/AdminState';
+import { useAuth } from '../../context/AuthContext/AuthContext'
 import UsersTab from '../../components/Admin/UsersTab';
 import ProductsTab from '../../components/Admin/ProductsTab';
 import OrdersTab from '../../components/Admin/OrdersTab';
+import { Navigate } from 'react-router-dom';
 
 const AdminPanel = () => {
+    const { user } = useAuth();
     const { getUsers, getOrders, getProducts } = useContext(AdminContext);
     const [activeTab, setActiveTab] = useState('products');
-
     useEffect(() => {
+        if (user?.role === 'admin') {
         getUsers();
         getOrders();
         getProducts();
+        }
     }, []);
+
+    if (!user) {
+        console.log('Usuario actual:', user);
+        return <Navigate to="/login" replace />;
+    }
+
+    if (user.role !== 'admin') {
+        return <Navigate to="/products" replace />;
+    }
 
     return (
         <div className="admin-panel">

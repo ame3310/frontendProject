@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { AdminContext } from '../../context/AdminContext/AdminState';
+import OrderList from '../OrderList'
 
 const OrdersTab = () => {
   const { orders } = useContext(AdminContext);
@@ -7,7 +8,7 @@ const OrdersTab = () => {
   return (
     <section className="admin-panel__section">
       <h2 className="admin-panel__section-title">Pedidos</h2>
-      <pre className="admin-panel__json">{JSON.stringify(orders, null, 2)}</pre>
+      <OrderList orders={orders} isAdmin={true}/>
     </section>
   );
 };

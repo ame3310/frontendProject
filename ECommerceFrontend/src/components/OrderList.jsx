@@ -10,13 +10,18 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ProductCard from "./ProductCard";
 
-const OrdersList = ({ orders }) => {
+const OrdersList = ({ orders, isAdmin = false }) => {
   if (!orders.length) return <Typography>No tienes pedidos aún.</Typography>;
 
   return orders.map((order) => (
     <Accordion key={order.id}>
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography variant="h6">Pedido #{order.id}</Typography>
+        <Typography variant="h6">Pedido #{order.id} </Typography>
+        {isAdmin && (
+        <Typography variant="subtitle2" color="text.secondary">
+          Realizado por: {order.user?.userName || "Usuario desconocido"}
+        </Typography>  
+        )}
       </AccordionSummary>
 
       <AccordionDetails>

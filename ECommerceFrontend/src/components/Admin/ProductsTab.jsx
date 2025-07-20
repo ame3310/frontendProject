@@ -78,7 +78,7 @@ const ProductsTab = () => {
                 open={modalOpen}           
                 onCancel={closeModal}      
                 footer={null}              
-                destroyOnClose={true}       
+                destroyOnHidden={true}       
             >
             <ProductForm
                 product={editingProduct}

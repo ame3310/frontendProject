@@ -16,7 +16,6 @@ const OrderProvider = ({children}) => {
             quantity: item.quantity,
         }));
 
-        console.log('🟢 items:', items);
             const res = await axios.post(
                 `${API_URL}/orders`,
                 { items },
