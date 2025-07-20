@@ -10,7 +10,6 @@ import { LoginForm } from './components/LoginForm'
 import { RegisterForm } from './components/RegisterForm'
 import { ProfilePage } from './pages/Profile/ProfilePage'
 import { RequireAuth } from './components/RequireAuth'
-import { Navigate } from 'react-router-dom'
 
 function App() {
   return (
@@ -18,7 +17,7 @@ function App() {
       <AppHeader />
         <main>
           <Routes>
-            <Route path="/" element={<Navigate to="/login" replace />} />
+            <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path='/products' element={<Products />} />
             <Route path='/cart' element={<Cart/>} />
