@@ -35,19 +35,15 @@ const Home = () => {
 
       <section className='home__featured'>
         <h2>Productos Destacados</h2>
-
         <div className='home__product-grid'>
           {products.length === 0 ? (
             <p>Cargando productos...</p>
           ) : (
             products.map((product) => (
-              <ProductCard key={product.id} product={product} size="large" hideAddToCart/>
+              <ProductCard key={product.id} product={product} size="medium" hideAddToCart/>
             ))
           )}
         </div>
-        <Link to='/products' className='btn-secondary'>
-          Ver todos los productos
-        </Link>
       </section>
     </main>
   )

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProductById } from "../utils/api";
+import { getProductById } from "../../utils/api";
 
 const ProductDetail = () => {
   const { id } = useParams();

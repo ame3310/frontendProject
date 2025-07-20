@@ -1,7 +1,5 @@
-import {Link, NavLink} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import {Grid, Layout, Menu, Drawer, Button} from 'antd'
-import {AiOutlineHome} from 'react-icons/ai'
 import {
   HomeOutlined,
   ShoppingCartOutlined,
@@ -14,10 +12,10 @@ import {
   BulbOutlined,
   MoonOutlined,
 } from '@ant-design/icons'
-import {useNavigate, useLocation} from 'react-router-dom'
-import {useTheme} from '../../context/ThemeContext'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { useTheme } from '../../context/ThemeContext'
 
-const {Header} = Layout
+const { Header } = Layout
 
 const AppHeader = () => {
   const screens = Grid.useBreakpoint()
