@@ -61,11 +61,3 @@ Tendrás que clonar la versión más reciente, disponible [aquí](https://github
 2. Instala dependencias `npm i`
 3. Levanta el proyecto con `npm run dev`
 
-## Desarrolladores
-
-- Ametz [@Ame3310](https://www.github.com/Ame3310)
-- Paula [@PaulaVegas](https://www.github.com/PaulaVegas)
-  
-- Maider [@Maiderspb](https://www.github.com/Maiderspb)
-
-Con la colaboración especial de [AranBeitia](https://github.com/aranbeitia), que corrigió algunos errores críticos.
