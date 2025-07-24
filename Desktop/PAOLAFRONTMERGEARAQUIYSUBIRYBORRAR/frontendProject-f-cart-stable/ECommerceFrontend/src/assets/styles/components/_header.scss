@@ -1,0 +1,55 @@
+.app-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;  
+  padding: 0 1rem;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+
+  &.light {
+    background-color: #fff;
+    color: #000;
+
+    .logo span {
+      color: #1890ff;
+    }
+  }
+
+  &.dark {
+    background-color: #001529;
+    color: #fff;
+
+    .logo span {
+      color: #40a9ff;
+    }
+  }
+
+  .logo {
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .app-menu {
+    flex: 1;
+    display: flex;           
+    justify-content: center; 
+    border-bottom: none;
+  }
+
+  .theme-toggle {
+    font-size: 20px;
+    margin-left: 12px;
+    color: inherit;
+  }
+
+  .menu-toggle {
+    font-size: 24px;
+    margin-left: 12px;
+    color: inherit;
+  }
+}
