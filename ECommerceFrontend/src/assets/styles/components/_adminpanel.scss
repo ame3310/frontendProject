@@ -1,0 +1,131 @@
+.admin-panel {
+	padding: 20px;
+	font-family: Arial, sans-serif;
+}
+
+.admin-panel__title {
+	margin-bottom: 20px;
+}
+
+.admin-panel__nav {
+	margin-bottom: 20px;
+}
+
+.admin-panel__new-product {
+	margin-top: 1rem;
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+
+	.admin-panel__input {
+		padding: 0.3rem 0.5rem;
+		font-size: 1rem;
+	}
+
+	.admin-panel__btn--add {
+		background-color: #28a745;
+		color: white;
+		border: none;
+		padding: 0.4rem 0.8rem;
+		cursor: pointer;
+		border-radius: 4px;
+		transition: background-color 0.3s ease;
+
+		&:hover {
+			background-color: #218838;
+		}
+	}
+}
+
+.admin-panel__nav-btn {
+	background: #eee;
+	border: 1px solid #ccc;
+	padding: 8px 16px;
+	margin-right: 8px;
+	cursor: pointer;
+	border-radius: 4px;
+	transition: background-color 0.3s ease;
+}
+
+.admin-panel__nav-btn--active,
+.admin-panel__nav-btn:hover {
+	background-color: #007bff;
+	color: white;
+	border-color: #007bff;
+}
+
+.admin-panel__section {
+	margin-top: 20px;
+}
+
+.admin-panel__section-title {
+	margin-bottom: 12px;
+}
+
+.admin-panel__table {
+	width: 100%;
+	border-collapse: collapse;
+	text-align: left;
+}
+
+.admin-panel__table-head {
+	border-bottom: 2px solid #ccc;
+	padding: 8px;
+}
+
+.admin-panel__table-row:nth-child(even) {
+	background-color: #f9f9f9;
+}
+
+.admin-panel__table-data {
+	padding: 8px;
+	border-bottom: 1px solid #ddd;
+}
+
+.admin-panel__input {
+	width: 90%;
+	padding: 6px;
+	font-size: 1rem;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+
+.admin-panel__btn {
+	background-color: #007bff;
+	border: none;
+	color: white;
+	padding: 6px 12px;
+	margin-right: 6px;
+	border-radius: 3px;
+	cursor: pointer;
+	font-size: 0.9rem;
+	transition: background-color 0.3s ease;
+}
+
+.admin-panel__btn:hover {
+	background-color: #0056b3;
+}
+
+.admin-panel__btn--save {
+	background-color: #28a745;
+}
+
+.admin-panel__btn--save:hover {
+	background-color: #1e7e34;
+}
+
+.admin-panel__btn--cancel {
+	background-color: #dc3545;
+}
+
+.admin-panel__btn--cancel:hover {
+	background-color: #b02a37;
+}
+
+.admin-panel__json {
+	background-color: #f4f4f4;
+	padding: 10px;
+	border-radius: 4px;
+	overflow-x: auto;
+	max-height: 400px;
+}
