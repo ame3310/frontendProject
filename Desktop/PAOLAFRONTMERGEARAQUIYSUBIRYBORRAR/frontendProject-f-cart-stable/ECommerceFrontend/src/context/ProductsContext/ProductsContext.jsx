@@ -7,7 +7,7 @@ const ProductsContext = createContext();
 export const useProducts = () => useContext(ProductsContext);
 
 export const ProductsProvider = ({ children }) => {
-  const { user, loadUser } = useAuth();
+  const { user } = useAuth();
 
   const [allProducts, setAllProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -64,6 +64,7 @@ export const ProductsProvider = ({ children }) => {
     const product = updatedProducts[index];
     const currentlyFavorite = product?.isFavorite === true;
 
+    // Actualización optimista
     product.isFavorite = !currentlyFavorite;
     setAllProducts([...updatedProducts]);
     setFilteredProducts((prev) =>
@@ -78,8 +79,6 @@ export const ProductsProvider = ({ children }) => {
       } else {
         await addFavorite(productId);
       }
-
-      await loadUser();
     } catch (error) {
       console.error(
         `[ProductsContext] Error al ${
@@ -88,6 +87,7 @@ export const ProductsProvider = ({ children }) => {
         error?.response?.data?.message || error.message
       );
 
+      // Revertir en caso de error
       product.isFavorite = currentlyFavorite;
       setAllProducts([...updatedProducts]);
       setFilteredProducts((prev) =>

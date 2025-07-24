@@ -2,7 +2,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance";
 import { getUserProfile } from "../../services/profile";
-import tokenEvents from "../../utils/tokenEvents"
+import { addFavorite, removeFavorite } from "../../services/favorites";
+import tokenEvents from "../../utils/tokenEvents";
 
 const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
@@ -64,11 +65,29 @@ export const AuthProvider = ({ children }) => {
   const loadUser = async () => {
     try {
       const res = await getUserProfile();
-      console.log("[Auth] Perfil cargado:", res.data);
       setUser(res.data);
     } catch (error) {
       console.warn("[Auth] Token inválido o error al cargar perfil.");
       logout();
+    }
+  };
+
+  const toggleFavorite = async (productId) => {
+    if (!user) return;
+    try {
+      const isFavorite = user.favorites.some((fav) => fav.id === productId);
+
+      if (isFavorite) {
+        await removeFavorite(productId);
+      } else {
+        await addFavorite(productId);
+      }
+      await loadUser();
+    } catch (error) {
+      console.error(
+        "[Auth] Error actualizando favoritos:",
+        error?.response?.data?.message || error.message
+      );
     }
   };
 
@@ -105,6 +124,7 @@ export const AuthProvider = ({ children }) => {
         logout,
         loadUser,
         loading,
+        toggleFavorite,
       }}>
       {children}
     </AuthContext.Provider>

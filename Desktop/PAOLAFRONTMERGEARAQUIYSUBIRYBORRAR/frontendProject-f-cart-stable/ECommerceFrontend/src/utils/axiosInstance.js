@@ -24,8 +24,6 @@ axiosInstance.interceptors.response.use(
       !originalRequest.url.includes("/auth/refresh");
 
     if (is401 && isNotAuthEndpoint && !originalRequest._retry) {
-      console.log("[Interceptor] Token expirado. Intentando refrescar...");
-
       originalRequest._retry = true;
       const refreshToken = localStorage.getItem("refreshToken");
 
@@ -33,7 +31,7 @@ axiosInstance.interceptors.response.use(
         console.warn("[Interceptor] No hay refreshToken. Cerrando sesión.");
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
-        window.location.href = "/login"; // 🔥 Forzar logout inmediato
+        window.location.href = "/login";
         return Promise.reject(error);
       }
 
@@ -46,7 +44,6 @@ axiosInstance.interceptors.response.use(
         );
 
         const newAccessToken = data.accessToken;
-        console.log("[Interceptor] Nuevo accessToken:", newAccessToken);
 
         localStorage.setItem("accessToken", newAccessToken);
         tokenEvents.notify(newAccessToken);
@@ -58,10 +55,9 @@ axiosInstance.interceptors.response.use(
       } catch (refreshError) {
         console.error("[Interceptor] Error al refrescar token:", refreshError);
 
-        // 🔥 El refreshToken ha fallado → Cierre de sesión
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
-        window.location.href = "/login"; // Redirige al login
+        window.location.href = "/login";
 
         return Promise.reject(refreshError);
       }

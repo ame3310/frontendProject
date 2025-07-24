@@ -14,33 +14,43 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import OrdersList from "../../components/OrderList";
 import ReviewsList from "../../components/ReviewList";
 import ProductCard from "../../components/ProductCard";
+import { getAllReviewsByUser } from "../../services/reviews";
 import { deleteReview, updateReview } from "../../services/profile";
+import ProfileUpdateForm from "../../components/Profile/ProfileUpdateForm";
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+const BACKEND_URL =
+  import.meta.env.VITE_BACKEND_STATIC_URL || "http://localhost:3000";
 
 export const ProfilePage = () => {
   const { user, loadUser } = useAuth();
   const [loading, setLoading] = useState(true);
   const [expandedFavorites, setExpandedFavorites] = useState(false);
+  const [userReviews, setUserReviews] = useState([]);
 
-  if (!user) return <Typography>Cargando perfil...</Typography>;
+  const fetchUserReviews = async () => {
+    try {
+      const res = await getAllReviewsByUser();
+      setUserReviews(res.data);
+    } catch {
+      console.error("Error al obtener reviews del usuario");
+    }
+  };
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchData = async () => {
       setLoading(true);
       await loadUser();
+      await fetchUserReviews();
       setLoading(false);
     };
 
-    fetchUserData();
+    fetchData();
   }, []);
-
-  if (loading || !user) return <Typography>Cargando perfil...</Typography>;
 
   const handleDeleteReview = async (reviewId) => {
     try {
       await deleteReview(reviewId);
-      await loadUser();
+      await fetchUserReviews();
     } catch {
       console.error("Error al borrar la review");
     }
@@ -61,24 +71,17 @@ export const ProfilePage = () => {
       if (removeImage) {
         formData.append("removeImage", "true");
       }
-      console.log("reviewId:", reviewId);
-
-      for (let [key, value] of formData.entries()) {
-        console.log(`${key}:`, value);
-      }
 
       await updateReview(reviewId, formData);
-      await loadUser();
+      await fetchUserReviews();
     } catch {
       console.error("Error editando la review");
     }
   };
 
-  const favoriteProducts =
-    user.favorites?.map((product) => ({
-      ...product,
-      isFavorite: true,
-    })) || [];
+  const favoriteProducts = user?.favorites || [];
+
+  if (loading || !user) return <Typography>Cargando perfil...</Typography>;
 
   return (
     <Container maxWidth="md" sx={{ paddingY: 4 }}>
@@ -98,6 +101,8 @@ export const ProfilePage = () => {
 
       <Divider sx={{ marginY: 2 }} />
 
+      <ProfileUpdateForm />
+
       <Typography variant="h5" gutterBottom>
         Mis pedidos
       </Typography>
@@ -109,7 +114,8 @@ export const ProfilePage = () => {
         Mis reviews
       </Typography>
       <ReviewsList
-        reviews={user.reviews || []}
+        reviews={userReviews}
+        refreshReviews={fetchUserReviews}
         onEdit={handleEditReview}
         onDelete={handleDeleteReview}
       />

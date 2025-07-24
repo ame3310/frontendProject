@@ -4,7 +4,6 @@ import { Tag, Modal, Tooltip } from "antd";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import IconButton from "@mui/material/IconButton";
-import { useProducts } from "../context/ProductsContext/ProductsContext";
 import { useAuth } from "../context/AuthContext/AuthContext";
 
 const ProductCard = ({
@@ -13,19 +12,16 @@ const ProductCard = ({
   onAddToCart,
   hideAddToCart = false,
 }) => {
-  const { user } = useAuth();
-  const { toggleFavorite } = useProducts();
-
+  const { user, toggleFavorite } = useAuth();
   const BACKEND_URL =
-    import.meta.env.VITE_BACKEND_URL || "http://localhost:3000";
+    import.meta.env.VITE_BACKEND_STATIC_URL || "http://localhost:3000";
 
-  const isFavorite = product.isFavorite;
+  const isFavorite = user?.favorites.some((fav) => fav.id === product.id);
 
   const [showModal, setShowModal] = useState(false);
 
   const handleFavoriteClick = () => {
     if (!user) return;
-
     if (isFavorite) {
       setShowModal(true);
     } else {

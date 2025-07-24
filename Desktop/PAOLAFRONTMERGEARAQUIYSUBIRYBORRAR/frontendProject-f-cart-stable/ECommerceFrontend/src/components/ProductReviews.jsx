@@ -1,17 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Typography, Button, Input, Rate, message, Spin } from "antd";
-import { LikeOutlined, LikeFilled } from "@ant-design/icons";
 import { useAuth } from "../context/AuthContext/AuthContext.jsx";
-import { createReview, likeReview, unlikeReview } from "../services/reviews";
+import { getReviewsByProductId, createReview } from "../services/reviews";
+import ReviewLikeButton from "./Reviews/ReviewLikeButton";
 
 const { Title, Text } = Typography;
 
-const ProductReviews = ({ productId, reviews = [], refreshReviews }) => {
+const ProductReviews = ({ productId }) => {
   const { user } = useAuth();
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(5);
-  const [loadingLike, setLoadingLike] = useState(false);
   const [loadingReview, setLoadingReview] = useState(false);
+  const [reviews, setReviews] = useState([]);
+  const [loadingFetch, setLoadingFetch] = useState(true);
+
+  const fetchReviews = async () => {
+    setLoadingFetch(true);
+    try {
+      const res = await getReviewsByProductId(productId);
+      setReviews(res.data);
+    } catch (err) {
+      console.error("Error al obtener reviews:", err);
+      message.error("No se pudieron cargar las reseñas.");
+    } finally {
+      setLoadingFetch(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchReviews();
+  }, [productId]);
 
   const handleSubmit = async () => {
     if (!comment.trim()) return;
@@ -21,7 +39,7 @@ const ProductReviews = ({ productId, reviews = [], refreshReviews }) => {
       message.success("Review añadida con éxito.");
       setComment("");
       setRating(5);
-      await refreshReviews();
+      await fetchReviews();
     } catch {
       message.error("Error al enviar la review.");
     } finally {
@@ -29,34 +47,13 @@ const ProductReviews = ({ productId, reviews = [], refreshReviews }) => {
     }
   };
 
-  const handleToggleLike = async (review) => {
-    if (!user) {
-      message.warning("Debes iniciar sesión para dar like.");
-      return;
-    }
-
-    setLoadingLike(true);
-    try {
-      if (review.likedByUser) {
-        await unlikeReview(review.id);
-      } else {
-        await likeReview(review.id);
-      }
-      await refreshReviews();
-    } catch {
-      message.error("Error al actualizar el like.");
-    } finally {
-      setLoadingLike(false);
-    }
-  };
-
   return (
     <div className="product-reviews">
       <Title level={4}>Reseñas de este producto</Title>
 
-      {(loadingLike || loadingReview) && <Spin />}
+      {loadingFetch && <Spin />}
 
-      {reviews.length === 0 && !loadingLike && !loadingReview && (
+      {!loadingFetch && reviews.length === 0 && (
         <p>Este producto aún no tiene reseñas.</p>
       )}
 
@@ -67,14 +64,8 @@ const ProductReviews = ({ productId, reviews = [], refreshReviews }) => {
           </Text>
           <p>{review.comment}</p>
           <p>⭐ {review.rating} / 5</p>
-
-          <Button
-            icon={review.likedByUser ? <LikeFilled /> : <LikeOutlined />}
-            type={review.likedByUser ? "primary" : "default"}
-            onClick={() => handleToggleLike(review)}
-            disabled={loadingLike}>
-            {review.likeCount ?? 0}
-          </Button>
+          <p>👍 Likes: {review.likeCount}</p>
+          <ReviewLikeButton review={review} refreshReviews={fetchReviews} />
         </div>
       ))}
 

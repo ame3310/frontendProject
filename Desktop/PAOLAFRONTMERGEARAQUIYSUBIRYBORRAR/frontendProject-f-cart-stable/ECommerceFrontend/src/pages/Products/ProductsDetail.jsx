@@ -4,14 +4,14 @@ import { useProducts } from "../../context/ProductsContext/ProductsContext";
 import { getProductById } from "../../services/products";
 import ProductReviews from "../../components/ProductReviews";
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3000";
+const BACKEND_URL =
+  import.meta.env.VITE_BACKEND_STATIC_URL || "http://localhost:3000";
 
 const ProductDetail = () => {
   const { id } = useParams();
   const { getProductByIdLocal } = useProducts();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-  console.log("Producto cargado:", product);
 
   const fetchProduct = async () => {
     try {
@@ -55,11 +55,7 @@ const ProductDetail = () => {
         </p>
       </div>
 
-      <ProductReviews
-        productId={product.id}
-        reviews={product.reviews}
-        refreshReviews={fetchProduct}
-      />
+      <ProductReviews productId={product.id} />
     </div>
   );
 };

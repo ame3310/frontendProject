@@ -14,7 +14,9 @@ import EditIcon from "@mui/icons-material/Edit";
 import ImageIcon from "@mui/icons-material/Image";
 import ClearIcon from "@mui/icons-material/Clear";
 
-const ReviewsList = ({ reviews, onEdit, onDelete }) => {
+import ReviewLikeButton from "./Reviews/ReviewLikeButton";
+
+const ReviewsList = ({ reviews, onEdit, onDelete, refreshReviews }) => {
   if (!reviews.length) {
     return <Typography>No tienes reviews aún.</Typography>;
   }
@@ -22,15 +24,21 @@ const ReviewsList = ({ reviews, onEdit, onDelete }) => {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
       {reviews.map((r) => (
-        <ReviewItem key={r.id} review={r} onEdit={onEdit} onDelete={onDelete} />
+        <ReviewItem
+          key={r.id}
+          review={r}
+          onEdit={onEdit}
+          onDelete={onDelete}
+          refreshReviews={refreshReviews}
+        />
       ))}
     </Box>
   );
 };
 
-const ReviewItem = ({ review, onEdit, onDelete }) => {
+const ReviewItem = ({ review, onEdit, onDelete, refreshReviews }) => {
   const BACKEND_URL =
-    import.meta.env.VITE_BACKEND_URL || "http://localhost:3000";
+    import.meta.env.VITE_BACKEND_STATIC_URL || "http://localhost:3000";
 
   const [isEditing, setIsEditing] = useState(false);
   const [comment, setComment] = useState(review.comment);
@@ -62,9 +70,12 @@ const ReviewItem = ({ review, onEdit, onDelete }) => {
     }
 
     onEdit(review.id, {
-      formData,
+      rating,
+      comment,
+      imageFile,
+      removeImage,
     });
-    console.log(String(Number(rating)));
+
     setIsEditing(false);
   };
 
@@ -185,9 +196,7 @@ const ReviewItem = ({ review, onEdit, onDelete }) => {
             />
           )}
 
-          <Typography variant="caption">
-            Likes: {review.likes?.length ?? 0}
-          </Typography>
+          <ReviewLikeButton review={review} refreshReviews={refreshReviews} />
 
           <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 1 }}>
             <IconButton onClick={() => setIsEditing(true)} color="primary">

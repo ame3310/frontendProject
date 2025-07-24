@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAllProducts } from "../../services/products";
 import ProductCard from "../../components/ProductCard";
-import "./home.scss";
+import "./home.scss"; //mover su css a styles y cargarlo en el main.scss como el resto
 
 const Home = () => {
   const [products, setProducts] = useState([]);

@@ -4,6 +4,10 @@ export const getReviewsByProductId = (productId) => {
   return axiosInstance.get(`/reviews/product/${productId}`);
 };
 
+export const getAllReviewsByUser = () => {
+  return axiosInstance.get("/reviews/user");
+};
+
 export const createReview = (productId, rating, comment) => {
   return axiosInstance.post(`/reviews`, {
     productId,
@@ -13,8 +17,6 @@ export const createReview = (productId, rating, comment) => {
 };
 
 export const updateReview = (reviewId, formData) => {
-  console.log("reviewId:" + reviewId);
-  console.log("formData:" + formData);
   return axiosInstance.put(`/reviews/${reviewId}`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
