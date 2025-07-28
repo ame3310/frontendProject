@@ -1,31 +1,52 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProductById } from "../../utils/api";
+import { useProducts } from "../../context/ProductsContext/ProductsContext";
+import { getProductById } from "../../services/products";
+import ProductReviews from "../../components/ProductReviews";
+
+const BACKEND_URL =
+  import.meta.env.VITE_BACKEND_STATIC_URL || "http://localhost:3000";
 
 const ProductDetail = () => {
   const { id } = useParams();
+  const { getProductByIdLocal } = useProducts();
   const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const fetchProduct = async () => {
+    try {
+      const res = await getProductById(id);
+      setProduct(res.data);
+    } catch (err) {
+      console.error("Error cargando producto", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetch = async () => {
-      try {
-        const res = await getProductById(id);
-        setProduct(res);
-      } catch (err) {
-        console.error("Error cargando producto", err);
-      }
-    };
-    fetch();
-  }, [id]);
+    const cachedProduct = getProductByIdLocal(id);
 
-  if (!product) return <p>Cargando producto...</p>;
+    if (cachedProduct) {
+      setProduct(cachedProduct);
+      setLoading(false);
+    } else {
+      fetchProduct();
+    }
+  }, [id, getProductByIdLocal]);
+
+  if (loading) return <p>Cargando producto...</p>;
+  if (!product) return <p>Producto no encontrado.</p>;
 
   return (
     <div className="product-detail">
       <img
-        src={`http://localhost:3000/uploads/${product.images?.[0] ?? 'placeholder.jpg'}`}
+        src={`${BACKEND_URL}/uploads/${
+          product.images?.[0] ?? "placeholder.jpg"
+        }`}
         alt={product.name}
       />
+
       <div className="product-detail__info">
         <h2>{product.name}</h2>
         <p>{product.description}</p>
@@ -34,22 +55,8 @@ const ProductDetail = () => {
         </p>
       </div>
 
-      <section className="product-detail__reviews">
-        <h3>Reseñas</h3>
-          {product.reviews && product.reviews.length > 0 ? (
-            <ul>   
-              {product.reviews.map((review) => (
-                <li key={review.id} className="review">
-                  <p><strong>{review.user}</strong> - {review.rating} ⭐</p>
-                  <p>{review.comment}</p>
-                </li>
-                ))}
-            </ul>
-          ) : (
-            <p>No hay reseñas para este producto.</p>
-            )}
-        </section>
-      </div>       
+      <ProductReviews productId={product.id} />
+    </div>
   );
 };
 

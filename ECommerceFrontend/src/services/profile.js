@@ -1,13 +1,21 @@
 import axiosInstance from "../utils/axiosInstance";
 
 export const getUserProfile = () => {
-	return axiosInstance.get("/users/profile");
+  return axiosInstance.get("/users/profile");
+};
+
+export const updateProfile = (formData) => {
+  return axiosInstance.patch("/users/profile", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
 };
 
 export const deleteReview = (id) => {
-	return axiosInstance.delete(`/reviews/${id}`);
+  return axiosInstance.delete(`/reviews/${id}`);
 };
 
-export const updateReview = (id, comment) => {
-	return axiosInstance.put(`/reviews/${id}`, { comment });
+export const updateReview = (id, formData) => {
+  return axiosInstance.put(`/reviews/${id}`, formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
 };
