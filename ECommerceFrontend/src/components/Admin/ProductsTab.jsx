@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { AdminContext } from '../../context/AdminContext/AdminState';
 import { Modal } from 'antd'
 import ProductForm from './ProductForm';
+import { createCategory } from '../../services/categories';
 
 const ProductsTab = () => {
     const { products, updateProduct, addProduct, getProducts, categories, getCategories } = useContext(AdminContext);
@@ -89,6 +90,7 @@ const ProductsTab = () => {
                     categories={categories}
                     loading={loading}
                     onSubmit={handleSubmit}
+                    createCategory={createCategory}
                     />
                 </Modal>
         </section>

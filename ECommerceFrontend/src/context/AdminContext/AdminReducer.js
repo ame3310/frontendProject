@@ -35,6 +35,11 @@ const AdminReducer = (state, action) => {
 				...state,
 				users: state.users.filter((user) => user.id !== action.payload),
 			};
+		case "ADD_CATEGORY":
+			return {
+				...state,
+				categories: [...state.categories, action.payload],
+			};
 		case "ADMIN_ERROR":
 			return { ...state, error: action.payload };
 		default:

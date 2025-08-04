@@ -93,6 +93,7 @@ export const AdminProvider = ({ children }) => {
       console.error("Error borrando usuario:", err.message);
     }
   };
+
   const getUser = async (userId) => {
     try {
       const response = await api.get(`/users/${userId}`);
@@ -101,6 +102,19 @@ export const AdminProvider = ({ children }) => {
       console.error(error);
     }
   };
+
+const createCategory = async (categoryData) => {
+  try {
+    const res = await axiosInstance.post("/categories", categoryData);
+    dispatch({ type: "ADD_CATEGORY", payload: res.data });
+    return res.data;
+  } catch (err) {
+    dispatch({ type: "ADMIN_ERROR", payload: err.message });
+    console.error("Error añadiendo categoría:", err.message);
+    throw err;
+  }
+};
+
   return (
     <AdminContext.Provider
       value={{
@@ -118,6 +132,7 @@ export const AdminProvider = ({ children }) => {
         categories: state.categories,
         getCategories,
         getUser,
+        createCategory,
       }}>
       {children}
     </AdminContext.Provider>
