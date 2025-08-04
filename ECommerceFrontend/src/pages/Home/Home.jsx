@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 import { getAllProducts } from "../../services/products";
 import ProductCard from "../../components/ProductCard";
 import "./home.scss";
+import homeHeroBg from "../../assets/images/nobg.png";
+import { Swiper, SwiperSlide } from "swiper/react"
+import "swiper/css";
+import judgingCat from "../../assets/images/judgingCat.jpg";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -21,34 +25,57 @@ const Home = () => {
   }, []);
 
   return (
-    <main className="home">
-      <section className="home__hero">
+    <main className="home" >
+      <section className="home__hero" style={{ "--home-hero-bg": `url(${homeHeroBg})` }}>
         <div>
           <h1>
-            Bienvenido a <span>Terminal Goods</span>
+            Bienvenido a <span>MichiStore</span>
           </h1>
-          <p>Explora productos tecnológicos únicos al mejor precio.</p>
+          <p>Donde los gatos mandan... y tú pagas.</p>
           <Link to="/products" className="btn-primary">
-            Ver productos
+            Aquí, humano
           </Link>
         </div>
       </section>
 
       <section className="home__featured">
-        <h2>Productos Destacados</h2>
-        <div className="home__product-grid">
+        <h2>Tributos Destacados</h2>
           {products.length === 0 ? (
             <p>Cargando productos...</p>
           ) : (
-            products.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                size="medium"
-                hideAddToCart
-              />
-            ))
+            <>
+          <p className="swipe-hint">Desliza para ver más productos</p>            
+          <Swiper
+            spaceBetween={50}
+            slidesPerView={1} 
+            centeredSlides={true}
+            loop={true}
+            navigation
+            pagination={{ clickable: true }}
+          >
+            {products.map((product) => (
+              <SwiperSlide key={product.id}>
+                <ProductCard
+                  product={product}
+                  size="medium"
+                  hideAddToCart
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          </>
           )}
+      </section>
+      <section className="home__cta">
+        <div className="cta-text">
+          <h3>¿Aún no has ofrecido tu tributo?</h3>
+          <p>Los gatos están impacientes... y tú procrastinando. 🐾</p>
+          <div className="cta-button-wrapper">    
+            <Link to="/products" className="btn-secondary">Redímete ahora</Link>
+          </div> 
+        </div>
+        <div className="cta-img" role="img" aria-label="Gato juzgando">
+          <img src={judgingCat} alt="Gato juzgando" />
         </div>
       </section>
     </main>

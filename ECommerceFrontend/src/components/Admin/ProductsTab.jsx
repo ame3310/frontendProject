@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { AdminContext } from '../../context/AdminContext/AdminState';
-import Modal from 'antd/es/modal/Modal';
+import { Modal } from 'antd'
 import ProductForm from './ProductForm';
 
 const ProductsTab = () => {
@@ -8,6 +8,7 @@ const ProductsTab = () => {
     const [modalOpen, setModalOpen] = useState(false)
     const [editingProduct, setEditingProduct] = useState(null)
     const [loading, setLoading] = useState(false);
+    const [successMessage, setSuccessMessage] = useState('');
 
     useEffect(() => {
         getProducts();
@@ -34,13 +35,16 @@ const ProductsTab = () => {
 
         if (editingProduct) {
             await updateProduct(editingProduct.id, formData); 
+            setSuccessMessage('Producto actualizado con éxito');
         } else {
             await addProduct(formData);
+            setSuccessMessage('Producto añadido con éxito');
         }
 
         await getProducts();
         setLoading(false);
         closeModal();
+        setTimeout(() => setSuccessMessage(''), 3000);
     };
 
     return (
@@ -73,20 +77,20 @@ const ProductsTab = () => {
                 ))}
                 </tbody>
             </table>
-
             <Modal
-                open={modalOpen}           
-                onCancel={closeModal}      
-                footer={null}              
-                destroyOnHidden={true}       
-            >
-            <ProductForm
-                product={editingProduct}
-                categories={categories}
+                    open={modalOpen}
+                    onCancel={closeModal}
+                    footer={null}
+                    destroyOnClose={true}
+                    width={600} 
+                >
+                    <ProductForm
+                    product={editingProduct}
+                    categories={categories}
                     loading={loading}
                     onSubmit={handleSubmit}
-            />
-            </Modal>
+                    />
+                </Modal>
         </section>
     );
 };

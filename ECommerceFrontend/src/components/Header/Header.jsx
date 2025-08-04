@@ -81,7 +81,7 @@ const AppHeader = () => {
         role="button"
         tabIndex={0}
         onKeyDown={(e) => e.key === "Enter" && navigate("/")}>
-        Terminal <span>Goods</span>
+        Michi<span>Store</span>
       </div>
 
       {user && (

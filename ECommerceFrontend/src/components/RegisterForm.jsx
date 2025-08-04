@@ -19,6 +19,7 @@ export const RegisterForm = () => {
       <input
         name="userName"
         placeholder="Nombre"
+        value={form.userName}
         onChange={handleChange}
         required
       />
@@ -26,6 +27,7 @@ export const RegisterForm = () => {
         name="email"
         type="email"
         placeholder="Correo"
+        value={form.email}
         onChange={handleChange}
         required
       />
@@ -33,6 +35,7 @@ export const RegisterForm = () => {
         name="password"
         type="password"
         placeholder="Contraseña"
+        value={form.password}
         onChange={handleChange}
         required
       />
