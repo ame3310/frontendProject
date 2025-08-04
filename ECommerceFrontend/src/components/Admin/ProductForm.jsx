@@ -7,6 +7,7 @@ const ProductForm = ({
   onSubmit,
   loading,
   createCategory,
+  onDelete,
 }) => {
   const [formData, setFormData] = useState({
     name: "",
@@ -22,9 +23,13 @@ const ProductForm = ({
   const [imagesToRemove, setImagesToRemove] = useState([]);
   const [newImages, setNewImages] = useState([]);
 
-  useEffect(() => {
-    setLocalCategories(categories);
-  }, [categories]);
+useEffect(() => {
+  const formatted = categories.map((cat) => ({
+    value: cat.id,
+    label: cat.name,
+  }));
+  setLocalCategories(formatted);
+}, [categories]);
 
   useEffect(() => {
     if (product) {
@@ -55,7 +60,8 @@ const ProductForm = ({
   const handleCategorySelect = (selectedOptions) => {
     setFormData((prev) => ({ ...prev, categoryIds: selectedOptions || [] }));
   };
-const handleAddCategory = async () => {
+  
+  const handleAddCategory = async () => {
     if (!newCategoryName.trim()) return;
 
     try {
@@ -223,6 +229,28 @@ const handleAddCategory = async () => {
           ? "Actualizar producto"
           : "Crear producto"}
       </button>
+      {product && (
+          <button
+            type="button"
+            onClick={() => {
+              if (confirm("¿Estás seguro de que quieres eliminar este producto?")) {
+                onDelete(product.id);
+              }
+            }}
+            style={{
+              marginTop: "1rem",
+              marginLeft: "0.5rem",
+              backgroundColor: "#dc3545",
+              color: "white",
+              padding: "0.75rem 1.25rem",
+              border: "none",
+              borderRadius: "6px",
+              cursor: "pointer",
+            }}
+          >
+            Eliminar producto
+          </button>
+        )}      
     </form>
   );
 };

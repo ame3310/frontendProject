@@ -13,13 +13,14 @@ import ProductCard from "./ProductCard";
 const OrdersList = ({ orders, isAdmin = false }) => {
   if (!orders.length) return <Typography>No tienes pedidos aún.</Typography>;
 
-  return orders.map((order) => (
+  return orders.map((order) => {
+    return (
     <Accordion key={order.id}>
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Typography variant="h6">Pedido #{order.id} </Typography>
         {isAdmin && (
         <Typography variant="subtitle2" color="text.secondary">
-          Realizado por: {order.user?.userName || "Usuario desconocido"}
+          Realizado por: {order.User?.userName || "Usuario desconocido"}
         </Typography>  
         )}
       </AccordionSummary>
@@ -47,9 +48,9 @@ const OrdersList = ({ orders, isAdmin = false }) => {
         </Typography>
       </AccordionDetails>
     </Accordion>
-  ));
-};
-
+  );
+});
+}
 const calculateOrderTotal = (order) => {
   return order.products
     .reduce((total, p) => {

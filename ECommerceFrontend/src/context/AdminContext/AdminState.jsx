@@ -83,7 +83,15 @@ export const AdminProvider = ({ children }) => {
       console.error("Error actualizando producto:", err.message);
     }
   };
-
+  const deleteProduct = async (id) => {
+    try {
+      await axiosInstance.delete(`/products/${id}`);
+      dispatch({ type: "DELETE_PRODUCT", payload: id });
+    } catch (err) {
+      dispatch({ type: "ADMIN_ERROR", payload: err.message });
+      console.error("Error borrando producto:", err.message);
+    }
+  };
   const deleteUser = async (id) => {
     try {
       await axiosInstance.delete(`/users/${id}`);
@@ -133,6 +141,7 @@ const createCategory = async (categoryData) => {
         getCategories,
         getUser,
         createCategory,
+        deleteProduct,
       }}>
       {children}
     </AdminContext.Provider>

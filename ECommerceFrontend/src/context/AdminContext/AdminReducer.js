@@ -30,6 +30,11 @@ const AdminReducer = (state, action) => {
 					p.id === action.payload.id ? action.payload : p
 				),
 			};
+		case "DELETE_PRODUCT":
+			return {
+				...state,
+				products: state.products.filter((p) => p.id !== action.payload),
+			};
 		case "DELETE_USER":
 			return {
 				...state,

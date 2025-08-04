@@ -5,7 +5,7 @@ import ProductForm from './ProductForm';
 import { createCategory } from '../../services/categories';
 
 const ProductsTab = () => {
-    const { products, updateProduct, addProduct, getProducts, categories, getCategories } = useContext(AdminContext);
+    const { products, updateProduct, addProduct, getProducts, categories, getCategories, deleteProduct } = useContext(AdminContext);
     const [modalOpen, setModalOpen] = useState(false)
     const [editingProduct, setEditingProduct] = useState(null)
     const [loading, setLoading] = useState(false);
@@ -74,7 +74,7 @@ const ProductsTab = () => {
                         Editar
                         </button>
                     </td>
-                    </tr>
+                </tr>
                 ))}
                 </tbody>
             </table>
@@ -82,15 +82,16 @@ const ProductsTab = () => {
                     open={modalOpen}
                     onCancel={closeModal}
                     footer={null}
-                    destroyOnClose={true}
+                    destroyOnHidden={true}
                     width={600} 
                 >
                     <ProductForm
                     product={editingProduct}
                     categories={categories}
                     loading={loading}
-                    onSubmit={handleSubmit}
+                    onSubmit={handleSubmit}                   
                     createCategory={createCategory}
+                    onDelete={deleteProduct}
                     />
                 </Modal>
         </section>

@@ -68,7 +68,7 @@ const Products = () => {
 
   return (
     <div className="products-page">
-      <h2>Todos los productos</h2>
+      <h2>Buscador</h2>
 
       <div className="filters">
         <SearchBar
@@ -99,14 +99,11 @@ const Products = () => {
           filteredProducts.map((p) => (
             <div key={p.id} className="product-wrapper">
               <ProductCard product={p} size="large" onAddToCart={handleAddToCart} />
-              {/* <button onClick={() => handleAddToCart(p)}>
-                Añadir al carrito
-              </button> */}
             </div>
           ))
         )}
       </div>
-       {cart.length > 0 && (
+        {cart.length > 0 && (
           <div className="cart-container compact">
             <div className="cart-sidebar">
               <Link to="/cart" style={{ textDecoration: 'none', color: 'inherit' }}>
