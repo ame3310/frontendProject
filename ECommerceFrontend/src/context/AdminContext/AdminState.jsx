@@ -1,5 +1,4 @@
 import { createContext, useReducer } from "react";
-import axios from "axios";
 import AdminReducer from "./AdminReducer";
 import axiosInstance from "../../utils/axiosInstance";
 
@@ -84,7 +83,15 @@ export const AdminProvider = ({ children }) => {
       console.error("Error actualizando producto:", err.message);
     }
   };
-
+  const deleteProduct = async (id) => {
+    try {
+      await axiosInstance.delete(`/products/${id}`);
+      dispatch({ type: "DELETE_PRODUCT", payload: id });
+    } catch (err) {
+      dispatch({ type: "ADMIN_ERROR", payload: err.message });
+      console.error("Error borrando producto:", err.message);
+    }
+  };
   const deleteUser = async (id) => {
     try {
       await axiosInstance.delete(`/users/${id}`);
@@ -94,6 +101,7 @@ export const AdminProvider = ({ children }) => {
       console.error("Error borrando usuario:", err.message);
     }
   };
+
   const getUser = async (userId) => {
     try {
       const response = await api.get(`/users/${userId}`);
@@ -102,6 +110,19 @@ export const AdminProvider = ({ children }) => {
       console.error(error);
     }
   };
+
+const createCategory = async (categoryData) => {
+  try {
+    const res = await axiosInstance.post("/categories", categoryData);
+    dispatch({ type: "ADD_CATEGORY", payload: res.data });
+    return res.data;
+  } catch (err) {
+    dispatch({ type: "ADMIN_ERROR", payload: err.message });
+    console.error("Error añadiendo categoría:", err.message);
+    throw err;
+  }
+};
+
   return (
     <AdminContext.Provider
       value={{
@@ -119,6 +140,8 @@ export const AdminProvider = ({ children }) => {
         categories: state.categories,
         getCategories,
         getUser,
+        createCategory,
+        deleteProduct,
       }}>
       {children}
     </AdminContext.Provider>

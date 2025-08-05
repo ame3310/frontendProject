@@ -1,0 +1,87 @@
+.product-form {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	color: var(--text);
+	background-color: var(--bg);
+	padding: 1.5rem;
+	border-radius: 12px;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 1rem;
+}
+
+.product-form label {
+	display: flex;
+	flex-direction: column;
+	font-weight: 600;
+	color: var(--text);
+}
+
+.product-form input[type="text"],
+.product-form input[type="number"],
+.product-form textarea {
+	margin-top: 0.4rem;
+	padding: 0.5rem 0.75rem;
+	border: 1.8px solid var(--primary-light);
+	border-radius: 8px;
+	background-color: var(--primary-dark);
+	color: var(--text);
+	font-size: 1rem;
+	transition: border-color 0.3s ease;
+	resize: vertical;
+}
+
+.product-form input[type="text"]:focus,
+.product-form input[type="number"]:focus,
+.product-form textarea:focus {
+	border-color: var(--accent);
+	outline: none;
+	box-shadow: 0 0 6px var(--accent);
+}
+
+.product-form input[type="file"] {
+	margin-top: 0.5rem;
+	color: var(--text);
+}
+
+.product-form fieldset {
+	border: 1px solid var(--primary-light);
+	padding: 1rem;
+	border-radius: 10px;
+	color: var(--text);
+}
+
+.product-form legend {
+	padding: 0 0.5rem;
+	font-weight: 700;
+	color: var(--accent);
+}
+
+.product-form input[type="checkbox"] {
+	margin-right: 0.5rem;
+	cursor: pointer;
+}
+
+.product-form button[type="submit"] {
+	align-self: flex-start;
+	background-color: var(--accent);
+	color: var(--primary-dark);
+	font-weight: 700;
+	border: none;
+	padding: 0.8rem 1.6rem;
+	border-radius: 12px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	font-size: 1.1rem;
+	min-width: 150px;
+}
+
+.product-form button[type="submit"]:hover:not(:disabled) {
+	background-color: var(--primary-light);
+	color: var(--primary-dark);
+}
+
+.product-form button[type="submit"]:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+}

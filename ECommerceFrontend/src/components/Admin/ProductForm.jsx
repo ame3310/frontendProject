@@ -6,6 +6,8 @@ const ProductForm = ({
   categories = [],
   onSubmit,
   loading,
+  createCategory,
+  onDelete,
 }) => {
   const [formData, setFormData] = useState({
     name: "",
@@ -14,9 +16,20 @@ const ProductForm = ({
     categoryIds: [],
   });
 
+  const [addingCategory, setAddingCategory] = useState(false);
+  const [newCategoryName, setNewCategoryName] = useState("");
+  const [localCategories, setLocalCategories] = useState(categories);
   const [currentImages, setCurrentImages] = useState([]);
   const [imagesToRemove, setImagesToRemove] = useState([]);
   const [newImages, setNewImages] = useState([]);
+
+useEffect(() => {
+  const formatted = categories.map((cat) => ({
+    value: cat.id,
+    label: cat.name,
+  }));
+  setLocalCategories(formatted);
+}, [categories]);
 
   useEffect(() => {
     if (product) {
@@ -47,6 +60,25 @@ const ProductForm = ({
   const handleCategorySelect = (selectedOptions) => {
     setFormData((prev) => ({ ...prev, categoryIds: selectedOptions || [] }));
   };
+  
+  const handleAddCategory = async () => {
+    if (!newCategoryName.trim()) return;
+
+    try {
+      const newCat = await createCategory({ name: newCategoryName.trim() });
+      const newOption = { value: newCat.id, label: newCat.name };
+      setLocalCategories((prev) => [...prev, newOption]);
+      setFormData((prev) => ({
+        ...prev,
+        categoryIds: [...prev.categoryIds, newOption],
+      }));
+      setNewCategoryName("");
+      setAddingCategory(false);
+    } catch (error) {
+      alert("Error creando categoría");
+      console.error(error);
+    }
+  };
 
   const toggleRemoveImage = (img) => {
     setImagesToRemove((prev) =>
@@ -75,10 +107,7 @@ const ProductForm = ({
     onSubmit(data);
   };
 
-  const categoryOptions = categories.map((cat) => ({
-    value: cat.id,
-    label: cat.name,
-  }));
+  const categoryOptions = localCategories;
 
   return (
     <form className="product-form" onSubmit={handleSubmit}>
@@ -115,14 +144,57 @@ const ProductForm = ({
 
       <label>
         Categorías:
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
         <Select
           isMulti
           options={categoryOptions}
           value={formData.categoryIds}
           onChange={handleCategorySelect}
           placeholder="Selecciona una o más categorías"
+          styles={{ container: (base) => ({ ...base, flex: 1 }) }}
         />
+        <button
+            type="button"
+            onClick={() => setAddingCategory((v) => !v)}
+            style={{
+              padding: "0.5rem 1rem",
+              backgroundColor: "#28a745",
+              color: "white",
+              border: "none",
+              borderRadius: "4px",
+              cursor: "pointer",
+            }}
+          >
+            {addingCategory ? "Cancelar" : "Añadir"}
+          </button>
+        </div>
       </label>
+      {addingCategory && (
+              <div style={{ marginTop: "0.5rem" }}>
+                <input
+                  type="text"
+                  placeholder="Nombre nueva categoría"
+                  value={newCategoryName}
+                  onChange={(e) => setNewCategoryName(e.target.value)}
+                  style={{ padding: "0.5rem", width: "70%" }}
+                />
+                <button
+                  type="button"
+                  onClick={handleAddCategory}
+                  style={{
+                    padding: "0.5rem 1rem",
+                    marginLeft: "0.5rem",
+                    backgroundColor: "#007bff",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "4px",
+                    cursor: "pointer",
+                  }}
+                >
+                  Guardar
+                </button>
+              </div>
+            )}
 
       {product && currentImages.length > 0 && (
         <fieldset>
@@ -157,6 +229,28 @@ const ProductForm = ({
           ? "Actualizar producto"
           : "Crear producto"}
       </button>
+      {product && (
+          <button
+            type="button"
+            onClick={() => {
+              if (confirm("¿Estás seguro de que quieres eliminar este producto?")) {
+                onDelete(product.id);
+              }
+            }}
+            style={{
+              marginTop: "1rem",
+              marginLeft: "0.5rem",
+              backgroundColor: "#dc3545",
+              color: "white",
+              padding: "0.75rem 1.25rem",
+              border: "none",
+              borderRadius: "6px",
+              cursor: "pointer",
+            }}
+          >
+            Eliminar producto
+          </button>
+        )}      
     </form>
   );
 };

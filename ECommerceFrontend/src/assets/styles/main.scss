@@ -1,4 +1,3 @@
-@use "abstracts/colors";
 @use "base/reset";
 @use "base/base";
 @use "themes/themes";
@@ -9,3 +8,6 @@
 @use "components/buttons";
 @use "./pages/productsDetail.scss";
 @use "./components/adminpanel";
+@use "./components/modal";
+@use "./components/productForm";
+@use "./components/login";

@@ -67,7 +67,7 @@ const ProductCard = ({
       <div className="product-card__categories">
         {product.categories && product.categories.length > 0 ? (
           product.categories.map((c) => (
-            <Tag color="blue" key={c.name}>
+            <Tag color="orange" key={c.name}>
               {c.name}
             </Tag>
           ))

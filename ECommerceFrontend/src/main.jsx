@@ -10,6 +10,7 @@ import { CartProvider } from "./context/CartContext/CartState.jsx";
 import { AdminProvider } from "./context/AdminContext/AdminState.jsx";
 import { AuthProvider } from "./context/AuthContext/AuthContext.jsx";
 import "./assets/styles/main.scss";
+import 'antd/dist/reset.css';
 
 const ThemedApp = () => {
   const { algorithm } = useTheme();

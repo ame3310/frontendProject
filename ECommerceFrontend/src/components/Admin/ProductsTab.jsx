@@ -1,13 +1,15 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { AdminContext } from '../../context/AdminContext/AdminState';
-import Modal from 'antd/es/modal/Modal';
+import { Modal } from 'antd'
 import ProductForm from './ProductForm';
+import { createCategory } from '../../services/categories';
 
 const ProductsTab = () => {
-    const { products, updateProduct, addProduct, getProducts, categories, getCategories } = useContext(AdminContext);
+    const { products, updateProduct, addProduct, getProducts, categories, getCategories, deleteProduct } = useContext(AdminContext);
     const [modalOpen, setModalOpen] = useState(false)
     const [editingProduct, setEditingProduct] = useState(null)
     const [loading, setLoading] = useState(false);
+    const [successMessage, setSuccessMessage] = useState('');
 
     useEffect(() => {
         getProducts();
@@ -34,13 +36,16 @@ const ProductsTab = () => {
 
         if (editingProduct) {
             await updateProduct(editingProduct.id, formData); 
+            setSuccessMessage('Producto actualizado con éxito');
         } else {
             await addProduct(formData);
+            setSuccessMessage('Producto añadido con éxito');
         }
 
         await getProducts();
         setLoading(false);
         closeModal();
+        setTimeout(() => setSuccessMessage(''), 3000);
     };
 
     return (
@@ -69,24 +74,26 @@ const ProductsTab = () => {
                         Editar
                         </button>
                     </td>
-                    </tr>
+                </tr>
                 ))}
                 </tbody>
             </table>
-
             <Modal
-                open={modalOpen}           
-                onCancel={closeModal}      
-                footer={null}              
-                destroyOnHidden={true}       
-            >
-            <ProductForm
-                product={editingProduct}
-                categories={categories}
+                    open={modalOpen}
+                    onCancel={closeModal}
+                    footer={null}
+                    destroyOnHidden={true}
+                    width={600} 
+                >
+                    <ProductForm
+                    product={editingProduct}
+                    categories={categories}
                     loading={loading}
-                    onSubmit={handleSubmit}
-            />
-            </Modal>
+                    onSubmit={handleSubmit}                   
+                    createCategory={createCategory}
+                    onDelete={deleteProduct}
+                    />
+                </Modal>
         </section>
     );
 };
