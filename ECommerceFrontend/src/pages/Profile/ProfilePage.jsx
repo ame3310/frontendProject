@@ -17,6 +17,7 @@ import ProductCard from "../../components/ProductCard";
 import { getAllReviewsByUser } from "../../services/reviews";
 import { deleteReview, updateReview } from "../../services/profile";
 import ProfileUpdateForm from "../../components/Profile/ProfileUpdateForm";
+import './profile.scss';
 
 const BACKEND_URL =
   import.meta.env.VITE_BACKEND_STATIC_URL || "http://localhost:3000";

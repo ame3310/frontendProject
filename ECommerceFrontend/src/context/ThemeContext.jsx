@@ -16,19 +16,19 @@ export const ThemeProvider = ({ children }) => {
   const algorithm = isDarkMode ? darkAlgorithm : defaultAlgorithm;
 
 const lightTokens = {
-    colorPrimary: '#1890ff', 
-    colorBgLayout: '#f0f2f5', 
-    colorText: '#000000d9', 
+    colorPrimary: '#dc7a0a', 
+    colorBgLayout: '#faf9f6', 
+    colorText: '#2c2f38', 
     colorBgContainer: '#ffffff', 
-    colorBorder: '#d9d9d9',
+    colorBorder: '#ddd9d4',
   };
 
   const darkTokens = {
-    colorPrimary: '#177ddc', 
-    colorBgLayout: '#141414', 
-    colorText: '#ffffffd9', 
-    colorBgContainer: '#1f1f1f', 
-    colorBorder: '#434343',
+    colorPrimary: '#dc7a0a', 
+    colorBgLayout: '#0b0f14', 
+    colorText: '#dadde3', 
+    colorBgContainer: '#1e1b26', 
+    colorBorder: '#2a2d33',
   };
 
   const themeTokens = isDarkMode ? darkTokens : lightTokens;

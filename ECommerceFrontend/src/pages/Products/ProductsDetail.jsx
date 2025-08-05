@@ -40,21 +40,20 @@ const ProductDetail = () => {
 
   return (
     <div className="product-detail">
-      <img
-        src={`${BACKEND_URL}/uploads/${
-          product.images?.[0] ?? "placeholder.jpg"
-        }`}
-        alt={product.name}
-      />
-
-      <div className="product-detail__info">
+      <div className="product-detail__image-info">
+        <img
+          src={`${BACKEND_URL}/uploads/${
+            product.images?.[0] ?? "placeholder.jpg"
+          }`}
+          alt={product.name}
+          className="product-detail__image"
+        />
+      <div className="product-detail__name-desc">
         <h2>{product.name}</h2>
         <p>{product.description}</p>
-        <p>
-          <strong>Precio:</strong> {product.price} €
-        </p>
+        <strong>Precio:</strong> {product.price} €        
       </div>
-
+    </div>
       <ProductReviews productId={product.id} />
     </div>
   );

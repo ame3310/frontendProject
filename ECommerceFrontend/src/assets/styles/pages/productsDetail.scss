@@ -1,73 +1,63 @@
 .product-detail {
 	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 2rem;
+	gap: 2rem;
+	max-width: 900px;
+	margin: 2rem auto;
 	background-color: var(--bg);
 	color: var(--text);
+	padding: 1.5rem;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
 
-	img {
+.product-detail__image-info {
+	display: flex;
+	flex-direction: column;
+	width: 300px;
+	flex-shrink: 0;
+}
+
+.product-detail__image {
+	width: 100%;
+	height: 200px;
+	object-fit: cover;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+	margin-bottom: 1rem;
+}
+
+.product-detail__name-desc h2 {
+	margin: 0 0 0.5rem 0;
+	color: var(--accent);
+}
+
+.product-detail__name-desc p {
+	margin: 0;
+	line-height: 1.4;
+}
+
+.product-detail__price-reviews {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+.product-detail__price-reviews p {
+	font-size: 1.2rem;
+	margin-bottom: 1rem;
+}
+
+@media (max-width: 600px) {
+	.product-detail {
+		flex-direction: column;
+		align-items: center;
+	}
+	.product-detail__image-info {
 		width: 100%;
-		max-width: 400px;
-		border-radius: 1rem;
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-		margin-bottom: 2rem;
-		object-fit: contain;
 	}
-
-	&__info {
-		max-width: 600px;
-		text-align: center;
-
-		h2 {
-			font-size: 2rem;
-			margin-bottom: 1rem;
-			color: var(--accent);
-		}
-
-		p {
-			font-size: 1.1rem;
-			margin-bottom: 1rem;
-
-			strong {
-				font-weight: 600;
-				color: var(--primary-light);
-			}
-		}
-	}
-	&__reviews {
-		max-width: 600px;
-		margin-top: 3rem;
-		text-align: left;
-
-		h3 {
-			font-size: 1.75rem;
-			margin-bottom: 1rem;
-			color: var(--accent);
-			text-align: center;
-		}
-
-		ul {
-			list-style: none;
-			padding: 0;
-			margin: 0;
-		}
-		.review {
-			background-color: var(--primary-dark);
-			border-radius: 8px;
-			padding: 1rem;
-			margin-bottom: 1rem;
-			box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-
-			p {
-				margin: 0.3rem 0;
-				color: var(--text);
-
-				strong {
-					color: var(--primary-light);
-					font-weight: 600;
-				}
-			}
-		}
+	.product-detail__price-reviews {
+		width: 100%;
+		margin-top: 1rem;
 	}
 }
