@@ -61,3 +61,6 @@ Tendrás que clonar la versión más reciente, disponible [aquí](https://github
 2. Instala dependencias `npm i`
 3. Levanta el proyecto con `npm run dev`
 
+## Demo del producto
+![GifMobile](./ECommerceFrontend/src/assets/demo/gifEcommerce.gif)
+_Más imágenes disponibles dentro de la carpeta `demo`_
